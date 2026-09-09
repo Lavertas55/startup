@@ -1,48 +1,45 @@
-# Your startup name here
+# OpenComms
 
-[My Notes](notes.md)
-
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-> [!NOTE]
-> This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
-> If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
+This application serves as a central repository to record efforts to contact and support students in a class. This allows greater collaboration and planning from Instructors and TAs in reaching out to struggling students and offering support.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Many times students struggle for one reason or another, and it can be difficult for instructors and TAs to coordinate their efforts and also track what they have already done to help students. OpenComms provides a simple web interface for instructors and TAs to record information about students and efforts made to support them. This information can be shared with other Instructors and TAs to better coordinate efforts.
 
 ### Design
 
-![Design image](placeholder.png)
+Here is a few design concepts for the main page, student overview, and student profile pages.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
+![Design image](OpenComms.svg)
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login over HTTPS
+- Ability to create courses and students
+- Record contact attempts/success
+- Courses, students, contact attempts are stored with persistence
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Six HTML pages for the site's structure.
+    - Login
+    - Courses Overview
+    - Course Creation
+    - Students Overview
+    - Student Creation
+    - Student Profile
+- **CSS** - Application styling that looks good on various screen sizes, using good spacing, and colors.
+- **React** - Provides interactive elements (login, course creation, record interaction, etc.). Also handles routing and components.
+- **Service** - Backend Service with endpoints for:
+    - Login
+    - Registration
+    - Creating courses/students
+    - Viewing courses and students
+    - Viewing course and student info
+- **DB/Login** - Stores logins, courses, students, and contact attemps in database. Cannot view or update courses/students without authenticating.
+- **WebSocket** - When a user submits a contact attempt, new course, or new student it is broadcast to all users.
 
 ## 🚀 Specification Deliverable
 
