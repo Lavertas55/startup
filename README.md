@@ -18,6 +18,7 @@ Here is a few design concepts for the main page, student overview, and student p
 - Ability to create courses and students
 - Record contact attempts/success
 - Courses, students, contact attempts are stored with persistence
+- Set reminders to contact specific students with Discord message reminders
 
 ### Technologies
 
@@ -38,6 +39,7 @@ I am going to use the required technologies in the following ways.
     - Creating courses/students
     - Viewing courses and students
     - Viewing course and student info
+    - Reminders to contact students using Discord's API
 - **DB/Login** - Stores logins, courses, students, and contact attemps in database. Cannot view or update courses/students without authenticating.
 - **WebSocket** - When a user submits a contact attempt, new course, or new student it is broadcast to all users.
 
@@ -48,12 +50,17 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement)
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
+- [x] I completed the prerequisites for this deliverable (Git commit requirement)
+    - Created my GitHub Repo based off of provided template
+- [x] Proper use of Markdown
+    - Use of lists, headers, and checklists
+- [x] A concise and compelling elevator pitch
+    - Wrote a short elevator pitch to start my README
+- [x] Description of key features
+    - Laid out my key features in an unordered list
 - [ ] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+    - Used Figma to create three sketches of my application
 
 ## 🚀 AWS deliverable
 
