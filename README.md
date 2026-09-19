@@ -1,10 +1,10 @@
-# OpenComms
+# StudentAware
 
 This application serves as a central repository to record efforts to contact and support students in a class. This allows greater collaboration and planning from Instructors and TAs in reaching out to struggling students and offering support.
 
 ### Elevator pitch
 
-Many times students struggle for one reason or another, and it can be difficult for instructors and TAs to coordinate their efforts and also track what they have already done to help students. OpenComms provides a simple web interface for instructors and TAs to record information about students and efforts made to support them. This information can be shared with other Instructors and TAs to better coordinate efforts.
+Many times students struggle for one reason or another, and it can be difficult for instructors and TAs to coordinate their efforts and also track what they have already done to help students. StudentAware provides a simple web interface for instructors and TAs to record information about students and efforts made to support them. This information can be shared with other Instructors and TAs to better coordinate efforts.
 
 ### Design
 
