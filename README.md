@@ -72,16 +72,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **HTML pages** - Created 8 pages to view and edit course and student information.
+- [x] **Proper HTML element usage** - Each page has a header, footer, and main element with additional elements where needed.
+- [x] **Links** - Pages link to simulate web app usage.
+- [x] **Text** - Text added to display course, student, and site info.
+- [x] **3rd party API placeholder** - Reminder table and form on `static/example-student.html` will use Discord API to send message reminders.
+- [x] **Images** - Profile picture added for students.
+- [x] **Login placeholder** - Login place holder present on `index.html`.
+- [x] **DB data placeholder** - Courses, students, and contact attempt tables have placeholder data.
+- [x] **WebSocket placeholder** - Websocket will be used to update table data without need to refresh the page.
 
 ## 🚀 CSS deliverable
 
