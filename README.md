@@ -10,7 +10,7 @@ Many times students struggle for one reason or another, and it can be difficult 
 
 Here is a few design concepts for the main page, student overview, and student profile pages.
 
-![Design image](OpenComms.svg)
+![Design image](StudentAware.svg)
 
 ### Key features
 
