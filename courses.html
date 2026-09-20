@@ -22,18 +22,45 @@
         <main>
             <h1>Courses</h1>
 
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>&num; Students</th>
-                </tr>
-                <tr>
-                    <td><a href="example-course.html">Introduction to Computer Science</a></td>
-                    <td>CS 111</td>
-                    <td>100</td>
-                </tr>
-            </table>
+            <section>
+                <button type="button">Add Course</button>
+
+                <div id="courses-table">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>&num; Students</th>
+                        </tr>
+                        <tr>
+                            <td><a href="example-course.html">Introduction to Computer Science</a></td>
+                            <td>CS 111</td>
+                            <td>100</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Normally the form will be hidden until the user clicks the add course button -->
+
+                <form id="add-course">
+                    <label for="name">
+                        Name:
+                        <input type="text" id="name" name="name"/>
+                    </label>
+
+                    <br>
+
+                    <label for="code">
+                        Code:
+                        <input type="text" id="code" name="code"/>
+                    </label>
+
+                    <br>
+
+                    <button type="submit">Add</button>
+                    <button type="button" id="cancel-add">Cancel</button>
+                </form>
+            </section>
 
             <hr>
         </main>
