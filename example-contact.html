@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Contact - Cosmo Cougar</title>
+</head>
+
+<body>
+    <header>
+        <h1>StudentAware</h1>
+
+        <nav>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li>Students</li>
+            </menu>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        <h1>Cosmo Cougar</h1>
+        <h2>ccougar</h2>
+
+        <section>
+            <button type="button" id="edit-contact">Edit</button>
+
+            <div id="contact-details">
+                <h3>Timestamp: 9/15/2026 &commat; 5:34 PM</h3>
+                <h3>Instructor: Shane Reese</h3>
+                <h3>Method: Email</h3>
+                <h3>Success: TRUE</h3>
+    
+                <h3>Notes:</h3>
+                <p>
+                    Cosmo is behind on his homework. We discussed the late policy
+                    and worked to establish a plan to remember his assignments.
+                    We will talk again in one week.
+                </p>
+            </div>
+
+            <!-- The form will normally be hidden until the user pushes the edit button -->
+
+            <form id="contact-form">
+                <label for="timestamp">
+                    Timestamp:
+                    <input type="datetime-local" id="timestamp" name="timestamp"
+                           value="2026-09-15T17:34">
+                </label>
+
+                <br>
+
+                <label for="instructor">
+                    Instructor:
+                    <select id="instructor" name="instructor">
+                        <optgroup>
+                            <option selected>Shane Reese</option>
+                        </optgroup>
+                    </select>
+                </label>
+
+                <br>
+
+                <label for="method">
+                    Method:
+                    <select id="method" name="method">
+                        <optgroup>
+                            <option selected>Email</option>
+                            <option>Canvas</option>
+                            <option>Discord</option>
+                            <option>In Person</option>
+                        </optgroup>
+                    </select>
+                </label>
+
+                <br>
+
+                <label for="success">
+                    Success:
+                    <input type="checkbox" id="success" name="success" checked/>
+                </label>
+
+                <br>
+
+                <label for="notes">
+                    Notes:
+                    <textarea id="notes" name="notes">Cosmo is behind on his homework. We discussed the late policy and worked to establish a plan to remember his assignments. We will talk again in one week.</textarea>
+                </label>
+
+                <br>
+
+                <button type="submit">Save</button>
+                <button type="button" id="cancel-edit">Cancel</button>
+            </form>
+        </section>
+
+        <hr>
+    </main>
+
+    <footer>
+        <span>Collin Mickelson</span>
+        <br>
+        <a href="https://github.com/lavertas55/startup">GitHub</a>
+    </footer>
+</body>
+
+</html>
