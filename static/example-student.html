@@ -43,6 +43,32 @@
                 </tr>
             </table>
 
+            <br>
+
+            <!-- Reminders will be delivered using the Discord API -->
+
+            <div id="reminders-table">
+                <span>Pending Reminders</span>
+                <table>
+                    <tr>
+                        <th>Timestamp</th>
+                    </tr>
+
+                    <tr>
+                        <td>9/26/2026 &commat; 1:00 PM</td>
+                    </tr>
+                </table>
+            </div>
+
+            <form>
+                <label for="timestamp">
+                    Reminder Date:
+                    <input type="datetime-local" id="timestamp" name="timestamp"/>
+                </label>
+
+                <button type="submit">Add Reminder</button>
+            </form>
+
             <hr>
         </main>
 
