@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Courses</title>
-    </head>
 
-    <body>
-        <header>
-            <h1>StudentAware</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+</head>
 
-            <nav>
-                <menu>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="courses.html">Courses</a></li>
-                    <li><a href="students.html">Students</a></li>
-                </menu>
-            </nav>
-            <hr>
-        </header>
+<body>
+    <header>
+        <h1>StudentAware</h1>
 
-        <main>
-            <h1>Courses</h1>
+        <nav>
+            <menu>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="students.html">Students</a></li>
+            </menu>
+        </nav>
+        <hr>
+    </header>
 
-            <section>
-                <button type="button">Add Course</button>
+    <main>
+        <h1>Courses</h1>
 
-                <div id="courses-table">
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Code</th>
-                            <th>&num; Students</th>
-                        </tr>
-                        <tr>
-                            <td><a href="example-course.html">Introduction to Computer Science</a></td>
-                            <td>CS 111</td>
-                            <td>100</td>
-                        </tr>
-                    </table>
-                </div>
+        <section>
+            <button type="button">Add Course</button>
 
-                <!-- Normally the form will be hidden until the user clicks the add course button -->
+            <div id="courses-table">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>&num; Students</th>
+                    </tr>
+                    <tr>
+                        <td><a href="example-course.html">Introduction to Computer Science</a></td>
+                        <td>CS 111</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </div>
 
-                <form id="add-course">
-                    <label for="name">
-                        Name:
-                        <input type="text" id="name" name="name"/>
-                    </label>
+            <!-- Normally the form will be hidden until the user clicks the add course button -->
 
-                    <br>
+            <form id="add-course">
+                <label for="name">
+                    Name:
+                    <input type="text" id="name" name="name" />
+                </label>
 
-                    <label for="code">
-                        Code:
-                        <input type="text" id="code" name="code"/>
-                    </label>
+                <br>
 
-                    <br>
+                <label for="code">
+                    Code:
+                    <input type="text" id="code" name="code" />
+                </label>
 
-                    <button type="submit">Add</button>
-                    <button type="button" id="cancel-add">Cancel</button>
-                </form>
-            </section>
+                <br>
 
-            <hr>
-        </main>
+                <button type="submit">Add</button>
+                <button type="button" id="cancel-add">Cancel</button>
+            </form>
+        </section>
 
-        <footer>
-            <span>Collin Mickelson</span>
-            <br>
-            <a href="https://github.com/lavertas55/startup">GitHub</a>
-        </footer>
-    </body>
+        <hr>
+    </main>
+
+    <footer>
+        <span>Collin Mickelson</span>
+        <br>
+        <a href="https://github.com/lavertas55/startup">GitHub</a>
+    </footer>
+</body>
+
 </html>

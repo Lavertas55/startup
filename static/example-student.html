@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cosmo Cougar (CS 111)</title>
-    </head>
 
-    <body>
-        <header>
-            <h1>StudentAware</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmo Cougar (CS 111)</title>
+</head>
 
-            <nav>
-                <menu>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="register.html">Register</a></li>
-                    <li><a href="courses.html">Courses</a></li>
-                    <li><a href="students.html">Students</a></li>
-                </menu>
-            </nav>
-            <hr>
-        </header>
+<body>
+    <header>
+        <h1>StudentAware</h1>
 
-        <main>
-            <img alt="profile picture" src="../assets/male-profile.svg"/>
-            <h1>Cosmo Cougar</h1>
-            <h2>ccougar</h2>
+        <nav>
+            <menu>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="students.html">Students</a></li>
+            </menu>
+        </nav>
+        <hr>
+    </header>
 
-            <span>Contact Attempts</span>
+    <main>
+        <img alt="profile picture" src="../assets/male-profile.svg" />
+        <h1>Cosmo Cougar</h1>
+        <h2>ccougar</h2>
 
-            <br>
+        <span>Contact Attempts</span>
 
+        <br>
+
+        <table>
+            <tr>
+                <th>Timestamp</th>
+                <th>Instructor</th>
+                <th>Method</th>
+                <th>Success</th>
+            </tr>
+            <tr>
+                <td><a href="example-contact.html">9/15/2026 &commat; 5:34 PM</a></td>
+                <td>Shane Reese</td>
+                <td>Email</td>
+                <td>TRUE</td>
+            </tr>
+        </table>
+
+        <br>
+
+        <!-- Reminders will be delivered using the Discord API -->
+
+        <div id="reminders-table">
+            <span>Pending Reminders</span>
             <table>
                 <tr>
                     <th>Timestamp</th>
-                    <th>Instructor</th>
-                    <th>Method</th>
-                    <th>Success</th>
                 </tr>
+
                 <tr>
-                    <td><a href="example-contact.html">9/15/2026 &commat; 5:34 PM</a></td>
-                    <td>Shane Reese</td>
-                    <td>Email</td>
-                    <td>TRUE</td>
+                    <td>9/26/2026 &commat; 1:00 PM</td>
                 </tr>
             </table>
+        </div>
 
-            <br>
+        <form>
+            <label for="timestamp">
+                Reminder Date:
+                <input type="datetime-local" id="timestamp" name="timestamp" />
+            </label>
 
-            <!-- Reminders will be delivered using the Discord API -->
+            <button type="submit">Add Reminder</button>
+        </form>
 
-            <div id="reminders-table">
-                <span>Pending Reminders</span>
-                <table>
-                    <tr>
-                        <th>Timestamp</th>
-                    </tr>
+        <hr>
+    </main>
 
-                    <tr>
-                        <td>9/26/2026 &commat; 1:00 PM</td>
-                    </tr>
-                </table>
-            </div>
+    <footer>
+        <span>Collin Mickelson</span>
+        <br>
+        <a href="https://github.com/lavertas55/startup">GitHub</a>
+    </footer>
+</body>
 
-            <form>
-                <label for="timestamp">
-                    Reminder Date:
-                    <input type="datetime-local" id="timestamp" name="timestamp"/>
-                </label>
-
-                <button type="submit">Add Reminder</button>
-            </form>
-
-            <hr>
-        </main>
-
-        <footer>
-            <span>Collin Mickelson</span>
-            <br>
-            <a href="https://github.com/lavertas55/startup">GitHub</a>
-        </footer>
-    </body>
 </html>
