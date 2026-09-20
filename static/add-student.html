@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Student</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>StudentAware</h1>
+
+            <nav>
+                <menu>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="students.html">Students</a></li>
+                </menu>
+            </nav>
+            <hr>
+        </header>
+
+        <main>
+            <h1>Add Student</h1>
+            
+            <!-- Normally this form would take you back to the previous page. -->
+
+            <form method="get" action="students.html">
+                <label for="name">
+                    Name:
+                    <input type="text" id="name" name="name"/>
+                </label>
+
+                <br>
+
+                <label for="id">
+                    ID:
+                    <input type="text" id="id" name="id"/>
+                </label>
+
+                <br>
+
+                <fieldset>
+                    <legend>Course</legend>
+                    <label for="cs111">CS 111</label>
+                    <input type="checkbox" id="cs111" name="cs111" value="cs111">
+                </fieldset>
+
+                <br>
+
+                <button type="submit">Add</button>
+                <button type="button">Cancel</button>
+            </form>
+            
+
+            <hr>
+        </main>
+
+        <footer>
+            <span>Collin Mickelson</span>
+            <br>
+            <a href="https://github.com/lavertas55/startup">GitHub</a>
+        </footer>
+    </body>
+</html>
