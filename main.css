@@ -50,6 +50,19 @@ ul .nav-item {
     padding-right: 0.3em;
 }
 
+div.table-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+div#courses-table {
+    margin: 0.6em;
+}
+
+th {
+    text-align: left !important;
+}
+
 footer a {
     float: right;
     padding-right: 0.3em;
