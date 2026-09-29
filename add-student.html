@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="forms.css">
     <link rel="stylesheet" href="add-student.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Add Student</title>
@@ -47,28 +48,28 @@
                     <div id="addStudentForm">
                         <form method="get" action="students.html">
                             <div class="row g-3">
-                                <div class="col-12 col-sm-6 col-md-4 input-group">
-                                    <label class="input-group-text" for="netid">Net ID:</label>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="netid">Net ID:</label>
                                     <input class="form-control" type="text" id="netid" name="netid" />
                                 </div>
                 
-                                <div class="col-12 col-sm-6 col-md-4 input-group">
-                                    <label class="input-group-text" for="name">Name:</label>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label" for="name">Name:</label>
                                     <input class="form-control" type="text" id="name" name="name" />
                                 </div>  
                             </div>
                             
                             <div class="row g-3">
-                                <div class="col-12 col-sm-6 col-md-4 input-group">
-                                    <label for="inputClass" class="input-group-text">Class</label>
+                                <div class="col-12 col-md-6">
+                                    <label for="inputClass" class="form-label">Class</label>
                                     <select id="inputClass" class="form-select">
                                     <option selected>Choose...</option>
                                     <option>CS 111: Introduction to Computer Science</option>
                                     </select>
                                 </div>
                     
-                                <div class="col-12 col-sm-6 col-md-4 input-group">
-                                    <label for="profile-pic" class="input-group-text">Picture:</label>
+                                <div class="col-12 col-md-6">
+                                    <label for="profile-pic" class="form-label">Picture:</label>
                                     <input class="form-control" type="file" id="profile-pic" name="profile-pic" accept=".jpg,.png" />
                                 </div>
                             </div>
