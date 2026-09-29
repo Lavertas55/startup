@@ -16,6 +16,12 @@ div.table-title-container {
     align-items: flex-start;
 }
 
+div.table-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 div.table-header {
     display: flex;
     flex-direction: column;

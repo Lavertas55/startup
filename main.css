@@ -62,12 +62,6 @@ ul .nav-item {
     padding-right: 0.3em;
 }
 
-div.table-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 footer a {
     float: right;
     padding-right: 0.3em;
