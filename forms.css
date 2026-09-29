@@ -2,4 +2,12 @@ div.col {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
+}
+
+div.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 15%;
 }
