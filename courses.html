@@ -68,22 +68,30 @@
     
                 <!-- Normally the form will be hidden until the user clicks the add course button -->
     
-                <form id="add-course">                    
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="class-code">Class Code:</label>
-                        <input class="form-control" type="text" id="class-code" name="class-code" />
+                <div class="card rounded-3">
+                    <div class="card-header">
+                        <h2>Add Course</h2>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="name">Name:</label>
-                        <input class="form-control" type="text" id="name" name="name" />
-                    </div>
+                    <div class="card-body">
+                        <form id="add-course">                    
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="class-code">Class Code:</label>
+                                <input class="form-control" type="text" id="class-code" name="class-code" />
+                            </div>
         
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-success" type="submit">Add</button>
-                        <button class="btn btn-danger" type="button" id="cancel-add">Cancel</button>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="name">Name:</label>
+                                <input class="form-control" type="text" id="name" name="name" />
+                            </div>
+                
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-success" type="submit">Add</button>
+                                <button class="btn btn-danger" type="button" id="cancel-add">Cancel</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </section>
         </div>
     </main>
