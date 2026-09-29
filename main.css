@@ -56,18 +56,6 @@ div.table-title {
     align-items: center;
 }
 
-div#courses-table {
-    margin: 0.6em;
-}
-
-th {
-    text-align: left !important;
-}
-
-td {
-    text-align: left !important;
-}
-
 footer a {
     float: right;
     padding-right: 0.3em;
