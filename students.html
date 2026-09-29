@@ -9,57 +9,71 @@
     <title>Students</title>
 </head>
 
-<body>
-    <header>
-        <h1>StudentAware</h1>
+<body class="bg-dark text-light">
+    <header class="container-fluid">
+        <nav class="navbar fixed-top navbar-dark">
+            <div class="fluid-container header-container">
+                <a class="navbar-brand" href="index.html">StudentAware</a>
+            </div>
 
-        <nav>
-            <menu>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="students.html">Students</a></li>
-            </menu>
+            <div class="fluid-container">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="students.html">Students</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-        <hr>
     </header>
 
-    <main>
-        <h2>Students</h2>
+    <main class="container-fluid bg-secondary text-center">
+        <div>
+            <div class="table-title">
+                <h1>Students</h1>
 
-        <section>
-            <form method="get" action="add-student.html">
-                <button type="submit">Add Student</button>
-            </form>
-
-            <div id="students-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>ID</th>
-                            <th>Courses</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td><a href="example-student.html">Cosmo Cougar</a></td>
-                            <td>ccougar</td>
-                            <td><a href="example-course.html">CS 111</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form method="get" action="add-student.html">
+                    <button class="btn btn-primary" type="submit">Add Student</button>
+                </form>
             </div>
-        </section>
-
-        <hr>
+    
+            <section>
+                <div class="card rounded-3" id="students-table">
+                    <div class="card-body">
+                        <table class="table table-bordered md-0 mb-0 table-responsive table-light table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Net ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Courses</th>
+                                </tr>
+                            </thead>
+        
+                            <tbody class="table-group-divider">
+                                <tr>
+                                    <th scope="row">ccougar</th>
+                                    <td><a class="text-reset" href="example-student.html">Cosmo Cougar</a></td>
+                                    <td><a class="text-reset" href="example-course.html">CS 111</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <span>Collin Mickelson</span>
-        <br>
-        <a href="https://github.com/lavertas55/startup">GitHub</a>
+    <footer class="bg-dark text-white-50">
+        <span class="text-reset">Collin Mickelson</span>
+        <a class="text-reset" href="https://github.com/lavertas55/startup">GitHub</a>
     </footer>
 </body>
 
