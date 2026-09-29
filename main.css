@@ -64,6 +64,10 @@ th {
     text-align: left !important;
 }
 
+td {
+    text-align: left !important;
+}
+
 footer a {
     float: right;
     padding-right: 0.3em;
