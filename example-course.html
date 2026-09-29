@@ -5,58 +5,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="course.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>Introduction to Computer Science - CS 111</title>
 </head>
 
-<body>
-    <header>
-        <h1>StudentAware</h1>
+<body class="bg-dark text-white">
+    <header class="container-fluid">
+        <nav class="navbar fixed-top navbar-dark">
+            <div class="fluid-container header-container">
+                <a class="navbar-brand" href="index.html">StudentAware</a>
+            </div>
 
-        <nav>
-            <menu>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="students.html">Students</a></li>
-            </menu>
+            <div class="fluid-container">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="courses.html">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="students.html">Students</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-        <hr>
     </header>
 
-    <main>
-        <h2>Introduction to Computer Science</h2>
-        <h3>CS 111</h3>
-
-        <form method="get" action="add-student.html">
-            <button type="submit">Add Student</button>
-        </form>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Last Contact</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr>
-                    <td><a href="example-student.html">Cosmo Cougar</a></td>
-                    <td>ccougar</td>
-                    <td>9/15/2026 &commat; 5:34 PM</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <hr>
+    <main class="container-fluid bg-secondary text-center">
+        <div>
+            <div class="table-title-container">
+                <h1>Introduction to Computer Science</h1>
+    
+                <div class="table-subtitle">
+                    <h4>CS 111</h4>
+                    <a class="btn btn-primary" href="add-student.html">Add Student</a>
+                </div>
+            </div>
+    
+            <div class="card rounded-3 mt-3">
+                <div class="card-body">
+                    <table class="table table-bordered md-0 mb-0 table-responsive table-light table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Last Contact</th>
+                            </tr>
+                        </thead>
+            
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row">ccougar</th>
+                                <td><a class="text-reset" href="example-student.html">Cosmo Cougar</a></td>
+                                <td>9/15/2026 &commat; 5:34 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <span>Collin Mickelson</span>
-        <br>
-        <a href="https://github.com/lavertas55/startup">GitHub</a>
+    <footer class="bg-dark text-white-50">
+        <span class="text-reset">Collin Mickelson</span>
+        <a class="text-reset" href="https://github.com/lavertas55/startup">GitHub</a>
     </footer>
 </body>
 
