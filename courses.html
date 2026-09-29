@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students</title>
+    <title>Courses</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 
         <nav>
             <menu>
-                <li><a href="../index.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="register.html">Register</a></li>
                 <li><a href="courses.html">Courses</a></li>
                 <li><a href="students.html">Students</a></li>
@@ -23,32 +23,47 @@
     </header>
 
     <main>
-        <h2>Students</h2>
+        <h2>Courses</h2>
 
         <section>
-            <form method="get" action="add-student.html">
-                <button type="submit">Add Student</button>
-            </form>
+            <button type="button" id="add-course-btn">Add Course</button>
 
-            <div id="students-table">
+            <div id="courses-table">
                 <table>
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>ID</th>
-                            <th>Courses</th>
+                            <th>Code</th>
+                            <th>&num; Students</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         <tr>
-                            <td><a href="example-student.html">Cosmo Cougar</a></td>
-                            <td>ccougar</td>
-                            <td><a href="example-course.html">CS 111</a></td>
+                            <td><a href="example-course.html">Introduction to Computer Science</a></td>
+                            <td>CS 111</td>
+                            <td>100</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <!-- Normally the form will be hidden until the user clicks the add course button -->
+
+            <form id="add-course">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" />
+
+                <br>
+
+                <label for="code">Code:</label>
+                <input type="text" id="code" name="code" />
+
+                <br>
+
+                <button type="submit">Add</button>
+                <button type="button" id="cancel-add">Cancel</button>
+            </form>
         </section>
 
         <hr>
