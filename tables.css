@@ -1,0 +1,44 @@
+div.table-header-container {
+    display: flex;
+    align-items: center;
+
+    img {
+        width: 100px;
+        height: 100px;
+        margin-right: 0.6em;
+    }
+}
+
+div.table-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+div.table-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+div.table-subtitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    h4 {
+        font-style: italic;
+    }
+}
+
+td.contact-status {
+    text-align: center !important;
+}
+
+td div.reminder {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
