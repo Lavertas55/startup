@@ -11,16 +11,17 @@ div.table-header-container {
 
 div.table-title-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 div.table-title {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 div.table-header {
