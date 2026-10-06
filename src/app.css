@@ -30,11 +30,6 @@ main {
     justify-content: space-around;
 }
 
-main::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-}
-
 footer {
     flex: 0 30px;
 }
