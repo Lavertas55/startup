@@ -1,6 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
 
 function Header() {
     return (
@@ -13,7 +15,7 @@ function Header() {
                 <div className="fluid-container">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" href="index.html">Home</a>
+                            <NavLink className="nav-link active" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="register.html">Register</a>
@@ -42,10 +44,16 @@ function Footer() {
 
 export default function App() {
     return (
-        <body className="bg-dark text-light">
-            <Header />
-            
-            <Footer />
-        </body>
+        <BrowserRouter>
+            <div className="body bg-dark text-light">
+                <Header />
+                
+                <Routes>
+                    <Route path="/" element={<Login />} exact />
+                </Routes>
+
+                <Footer />
+            </div>
+        </BrowserRouter>
     );
 }
