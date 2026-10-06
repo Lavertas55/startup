@@ -6,6 +6,7 @@ import './styles/forms.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Register } from './register/register';
+import { Courses } from './courses/courses';
 
 function Header() {
     return (
@@ -54,6 +55,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Login />} exact />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/courses" element={<Courses />} />
                 </Routes>
 
                 <Footer />
