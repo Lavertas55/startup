@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
+import { Register } from './register/register';
 
 function Header() {
     return (
@@ -18,13 +19,13 @@ function Header() {
                             <NavLink className="nav-link active" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="register.html">Register</a>
+                            <NavLink className="nav-link" to="/register">Register</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="courses.html">Courses</a>
+                            <NavLink className="nav-link" to="/courses">Courses</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="students.html">Students</a>
+                            <NavLink className="nav-link" to="/students">Students</NavLink>
                         </li>
                     </ul>
                 </div>
@@ -50,6 +51,7 @@ export default function App() {
                 
                 <Routes>
                     <Route path="/" element={<Login />} exact />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
 
                 <Footer />
