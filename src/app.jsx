@@ -1,9 +1,9 @@
-import React from 'react';
+import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 import './styles/tables.css';
 import './styles/forms.css';
-import { BrowserRouter, NavLink, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { Login } from './login/login';
 import { Register } from './register/register';
 import { Courses } from './courses/courses';
@@ -24,7 +24,7 @@ function Header() {
                 <div className="fluid-container">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link active" to="/">Home</NavLink>
+                            <NavLink className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/register">Register</NavLink>
@@ -51,6 +51,33 @@ function Footer() {
     );
 }
 
+function NotFound() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const goBackTimer = setTimeout(() => {
+                navigate(-1);
+        }, 3000)
+
+        return () => clearTimeout(goBackTimer);
+    }, []);
+
+    return (
+        <main className="container-fluid bg-secondary text-center">
+            <div className="card rounded-3">
+                <div className="card-header">
+                    <h1>Oops... (404)</h1>
+                </div>
+
+                <div className="cardbody p-3">
+                    <p>The page you are looking for doesn't exist.</p>
+                    <p>Don't worry we'll take you back in 3 seconds.</p>
+                </div>
+            </div>
+        </main>
+    );
+}
+
 export default function App() {
     return (
         <BrowserRouter>
@@ -68,6 +95,8 @@ export default function App() {
                     <Route path="/add-student" element={<AddStudent />} />
                     <Route path="/student/:studentId" element={<Student />} />
                     <Route path="/contact/:contactId" element={<Contact />} />
+
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
 
                 <Footer />
