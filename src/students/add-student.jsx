@@ -1,6 +1,9 @@
 import { BackButton } from "../components/shared/buttons.jsx";
+import { useNavigate } from "react-router-dom";
 
 export function AddStudent() {
+    const navigate = useNavigate();
+
     return (
         <main className="container-fluid bg-secondary text-center">
             <div>
@@ -10,7 +13,10 @@ export function AddStudent() {
                     </div>
                     <div className="cardbody p-3">
                         <div id="addStudentForm">
-                            <form method="get" action="/students">
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                navigate(-1);
+                            }}>
                                 <div className="row g-3">
                                     <div className="col-12 col-md-6">
                                         <label className="form-label" htmlFor="netid">Net ID:</label>
