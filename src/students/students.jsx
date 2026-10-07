@@ -33,7 +33,7 @@ export function Students() {
                                 <tbody className="table-group-divider">
                                     <tr>
                                         <th scope="row">ccougar</th>
-                                        <td><a className="text-reset" href="example-student.html">Cosmo Cougar</a></td>
+                                        <td><Link className="text-reset" to="/student/ccougar">Cosmo Cougar</Link></td>
                                         <td><a className="text-reset" href="example-course.html">CS 111</a></td>
                                     </tr>
                                 </tbody>
