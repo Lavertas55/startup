@@ -11,7 +11,7 @@ export function Register() {
                 </div>
                 <div className="card-body">
                     <form onSubmit={(e) => {
-                        e.preventDefault;
+                        e.preventDefault();
                         navigator("/courses")
                     }}>
                         <div className="input-group mb-3">
