@@ -8,7 +8,7 @@ export function BackButton({ btnStyle, btnText }) {
     };
 
     return (
-        <button className={`btn btn-${btnStyle}`} type="button" onClick={goBack}>
+        <button className={`${btnStyle}`} type="button" onClick={goBack}>
             {btnText}
         </button>
     );
