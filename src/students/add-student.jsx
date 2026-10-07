@@ -40,7 +40,7 @@ export function AddStudent() {
                                 
                                 <div className="btn-container centered">
                                     <button className="btn btn-success" type="submit">Add</button>
-                                    {BackButton("danger", "Cancel")}
+                                    <BackButton btnStyle="btn btn-danger" btnText="Cancel" />
                                 </div>
                             </form>
                         </div>
