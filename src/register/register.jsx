@@ -1,6 +1,8 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Register() {
+    const navigator = useNavigate();
+
     return (
         <main className="container-fluid bg-secondary text-center">
             <div className="card rounded-3">
@@ -8,7 +10,10 @@ export function Register() {
                     <h1>Register</h1>
                 </div>
                 <div className="card-body">
-                    <form method="get" action="/courses">
+                    <form onSubmit={(e) => {
+                        e.preventDefault;
+                        navigator("/courses")
+                    }}>
                         <div className="input-group mb-3">
                             <span className="input-group-text">@</span>
                             <input className="form-control" type="email" placeholder="you@example.com" />
