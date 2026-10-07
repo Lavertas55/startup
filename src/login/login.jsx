@@ -9,7 +9,7 @@ export function Login() {
                 </div>
 
                 <div className="card-body">
-                    <form method="get" action="courses.html">
+                    <form method="get" action="/courses">
                         <div className="input-group mb-3">
                             <span className="input-group-text">@</span>
                             <input className="form-control" type="email" placeholder="you@example.com" />
