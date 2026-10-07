@@ -1,6 +1,4 @@
-# StudentAware
-
-[Startup](https://startup.evrw.click)
+# [StudentAware](https://startup.evrw.click/)
 
 This application serves as a central repository to record efforts to contact and support students in a class. This allows greater collaboration and planning from Instructors and TAs in reaching out to struggling students and offering support.
 
@@ -101,10 +99,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **Bundled using Vite** - I installed and setup vite.
+- [x] **Components** - I broke each page into a couple of components.
+- [x] **Router** - Every page uses routing.
 
 ## 🚀 React part 2: Reactivity deliverable
 
