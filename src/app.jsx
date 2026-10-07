@@ -7,6 +7,8 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Register } from './register/register';
 import { Courses } from './courses/courses';
+import { Students } from './students/students';
+import { AddStudent } from './students/add-student';
 
 function Header() {
     return (
@@ -56,6 +58,8 @@ export default function App() {
                     <Route path="/" element={<Login />} exact />
                     <Route path="/register" element={<Register />} />
                     <Route path="/courses" element={<Courses />} />
+                    <Route path="/students" element={<Students />} />
+                    <Route path="/add-student" element={<AddStudent />} />
                 </Routes>
 
                 <Footer />

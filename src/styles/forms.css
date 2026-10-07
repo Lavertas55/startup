@@ -12,6 +12,10 @@ div.btn-container {
     gap: 10px;
 }
 
+div.btn-container.centered {
+    justify-content: center;
+}
+
 div#addStudentForm {
     width: 75vw;
 }
