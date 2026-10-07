@@ -69,7 +69,7 @@ function NotFound() {
                     <h1>Oops... (404)</h1>
                 </div>
 
-                <div className="cardbody p-3">
+                <div className="card-body p-3">
                     <p>The page you are looking for doesn't exist.</p>
                     <p>Don't worry we'll take you back in 3 seconds.</p>
                 </div>

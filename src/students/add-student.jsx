@@ -11,7 +11,7 @@ export function AddStudent() {
                     <div className="card-header">
                         <h1>Add Student</h1>
                     </div>
-                    <div className="cardbody p-3">
+                    <div className="card-body p-3">
                         <div id="addStudentForm">
                             <form onSubmit={(e) => {
                                 e.preventDefault();
