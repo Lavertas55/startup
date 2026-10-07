@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function StudentContacts() {
     return (
         <div className="card rounded-3">
@@ -30,7 +32,7 @@ function StudentContacts() {
         
                     <tbody className="table-group-divider">
                         <tr>
-                            <th scope="row"><a className="text-reset" href="example-contact.html">9/15/2026 @ 5:34 PM</a></th>
+                            <th scope="row"><Link className="text-reset" to="/contact/1">9/15/2026 @ 5:34 PM</Link></th>
                             <td>Shane Reese</td>
                             <td>Email</td>
                             <td className="contact-status"><input className="form-check-input" type="checkbox" aria-label="contact success" disabled checked/></td>

@@ -9,8 +9,9 @@ import { Register } from './register/register';
 import { Courses } from './courses/courses';
 import { Course } from './courses/course';
 import { Students } from './students/students';
-import { AddStudent } from './students/add-student';
 import { Student } from './students/student';
+import { AddStudent } from './students/add-student';
+import { Contact } from './students/contact';
 
 function Header() {
     return (
@@ -66,6 +67,7 @@ export default function App() {
                     <Route path="/students" element={<Students />} />
                     <Route path="/add-student" element={<AddStudent />} />
                     <Route path="/student/:studentId" element={<Student />} />
+                    <Route path="/contact/:contactId" element={<Contact />} />
                 </Routes>
 
                 <Footer />
