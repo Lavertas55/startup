@@ -3,10 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 import './styles/tables.css';
 import './styles/forms.css';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, Link } from 'react-router-dom';
 import { Login } from './login/login';
 import { Register } from './register/register';
 import { Courses } from './courses/courses';
+import { Course } from './courses/course';
 import { Students } from './students/students';
 import { AddStudent } from './students/add-student';
 import { Student } from './students/student';
@@ -16,7 +17,7 @@ function Header() {
         <header className="container-fluid">
             <nav className="navbar fixed-top navbar-dark">
                 <div className="fluid-container header-container">
-                    <a className="navbar-brand" href="#">StudentAware</a>
+                    <Link className="navbar-brand" to="/">StudentAware</Link>
                 </div>
 
                 <div className="fluid-container">

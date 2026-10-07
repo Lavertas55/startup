@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function CourseTable() {
     return (
@@ -26,7 +27,7 @@ function CourseTable() {
                     <tbody className="table-group-divider">
                         <tr>
                             <th scope="row">CS 111</th>
-                            <td><a className="text-reset" href="example-course.html">Introduction to Computer Science</a></td>
+                            <td><Link className="text-reset" to="/course/cs111">Introduction to Computer Science</Link></td>
                             <td>100</td>
                         </tr>
                     </tbody>

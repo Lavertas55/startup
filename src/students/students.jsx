@@ -34,7 +34,7 @@ export function Students() {
                                     <tr>
                                         <th scope="row">ccougar</th>
                                         <td><Link className="text-reset" to="/student/ccougar">Cosmo Cougar</Link></td>
-                                        <td><a className="text-reset" href="example-course.html">CS 111</a></td>
+                                        <td><Link className="text-reset" to="/course/cs111">CS 111</Link></td>
                                     </tr>
                                 </tbody>
                             </table>
