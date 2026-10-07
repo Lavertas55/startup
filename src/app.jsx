@@ -58,7 +58,10 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Login />} exact />
                     <Route path="/register" element={<Register />} />
+
                     <Route path="/courses" element={<Courses />} />
+                    <Route path="/course/:courseId" element={<Course />} />
+                    
                     <Route path="/students" element={<Students />} />
                     <Route path="/add-student" element={<AddStudent />} />
                     <Route path="/student/:studentId" element={<Student />} />
