@@ -1,9 +1,18 @@
-import { useEffect } from 'react';
+import React from 'react';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/app.css';
 import './styles/tables.css';
 import './styles/forms.css';
+
 import { BrowserRouter, NavLink, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
+import { Header } from './components/main/header';
+import { Footer } from './components/main/footer';
+import { NotFound } from './components/shared/notFound';
+
+import { AuthState } from './login/authState';
 import { Login } from './login/login';
 import { Register } from './register/register';
 import { Courses } from './courses/courses';
@@ -13,79 +22,29 @@ import { Student } from './students/student';
 import { AddStudent } from './students/add-student';
 import { Contact } from './students/contact';
 
-function Header() {
-    return (
-        <header className="container-fluid">
-            <nav className="navbar fixed-top navbar-dark">
-                <div className="fluid-container header-container">
-                    <Link className="navbar-brand" to="/">StudentAware</Link>
-                </div>
-
-                <div className="fluid-container">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/register">Register</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/courses">Courses</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/students">Students</NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    );
-}
-
-function Footer() {
-    return (
-        <footer className="bg-dark fixed-bottom text-white-50">
-            <span className="text-reset">Collin Mickelson</span>
-            <a className="text-reset" href="https://github.com/lavertas55/startup">GitHub</a>
-        </footer>
-    );
-}
-
-function NotFound() {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const goBackTimer = setTimeout(() => {
-                navigate(-1);
-        }, 3000)
-
-        return () => clearTimeout(goBackTimer);
-    }, []);
-
-    return (
-        <main className="container-fluid bg-secondary text-center">
-            <div className="card rounded-3">
-                <div className="card-header">
-                    <h1>Oops... (404)</h1>
-                </div>
-
-                <div className="card-body p-3">
-                    <p>The page you are looking for doesn't exist.</p>
-                    <p>Don't worry we'll take you back in 3 seconds.</p>
-                </div>
-            </div>
-        </main>
-    );
-}
-
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
+    function onAuthChange(userName, authState) {
+        setAuthState(authState);
+        setUserName(userName);
+    }
+
     return (
         <BrowserRouter>
             <div className="body bg-dark text-light">
-                <Header />
+                <Header authState={ authState } onAuthChange= { onAuthChange } />
                 
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={
+                        <Login
+                            userName={userName}
+                            authState={authState}
+                            onAuthChange={onAuthChange}
+                        />
+                    } />
                     <Route path="/register" element={<Register />} />
 
                     <Route path="/courses" element={<Courses />} />
