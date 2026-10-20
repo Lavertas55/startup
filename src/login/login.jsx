@@ -1,6 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
-export function Login() {
+import { AuthState } from './authState';
+import { Authenticated } from './authenticated';
+import { Unauthenticated } from './unauthenticated';
+
+export function Login({ userName, authState, onAuthChange }) {
     const navigator = useNavigate();
 
     return (
@@ -10,23 +14,17 @@ export function Login() {
                     <h1>Welcome to StudentAware!</h1>
                 </div>
 
-                <div className="card-body">
-                    <form onSubmit={(e) => {
-                        e.preventDefault();
-                        navigator("/courses");
-                    }}>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text">@</span>
-                            <input className="form-control" type="email" placeholder="you@example.com" />
-                        </div>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text">🔒</span>
-                            <input className="form-control" type="password" placeholder="password" />
-                        </div>
-            
-                        <button className="btn btn-primary" type="submit">Login</button>
-                    </form>
-                </div>
+                {authState === AuthState.Authenticated && (
+                    <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
+                )}
+                {authState === AuthState.Unauthenticated && (
+                    <Unauthenticated
+                        userName={userName}
+                        onLogin={(loginUserName) => {
+                            onAuthChange(loginUserName, AuthState.Authenticated);
+                        }}
+                    />
+                )}
             </div>
         </main>
     );
