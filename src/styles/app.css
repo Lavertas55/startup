@@ -15,6 +15,17 @@ header {
     flex: 0 70px;
 }
 
+#logout {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 90vw;
+    z-index: 1030;
+
+    margin-right: 0.3em;
+    margin-top: 0.3em;
+}
+
 main {
     position: absolute;
     top: 70px;
