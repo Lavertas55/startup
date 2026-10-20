@@ -5,8 +5,7 @@ import './styles/app.css';
 import './styles/tables.css';
 import './styles/forms.css';
 
-import { BrowserRouter, NavLink, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { Header } from './components/main/header';
 import { Footer } from './components/main/footer';
