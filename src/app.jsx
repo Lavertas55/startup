@@ -18,7 +18,6 @@ import { Courses } from './courses/courses';
 import { Course } from './courses/course';
 import { Students } from './students/students';
 import { Student } from './students/student';
-import { AddStudent } from './students/add-student';
 import { Contact } from './students/contact';
 
 export default function App() {
@@ -50,7 +49,6 @@ export default function App() {
                     <Route path="/course/:courseId" element={<Course />} />
                     
                     <Route path="/students" element={<Students />} />
-                    <Route path="/add-student" element={<AddStudent />} />
                     <Route path="/student/:studentId" element={<Student />} />
                     <Route path="/contact/:contactId" element={<Contact />} />
 
