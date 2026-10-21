@@ -28,11 +28,6 @@ export function StudentReminders() {
         });
         setTimestamp(currentDateTime());
     }
-
-    async function deleteReminder(event) {
-        const reminderId = event.target.id.slice('delete-'.length);
-        removeReminder(reminderId);
-    }
     
     return (
         <div className="card rounded-3 mt-3">
@@ -70,7 +65,7 @@ export function StudentReminders() {
                                                     type='button'
                                                     id={`delete-${reminder.id}`}
                                                     aria-label="delete reminder"
-                                                    onClick={deleteReminder}
+                                                    onClick={() => removeReminder(reminder.id)}
                                                 >
                                                     Delete
                                                 </Button>
