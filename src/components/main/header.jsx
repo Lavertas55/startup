@@ -9,7 +9,6 @@ export function Header(props) {
     const navigate = useNavigate();
 
     async function onLogout(onAuthChange) {
-        localStorage.removeItem('userName');
         onAuthChange('', AuthState.Unauthenticated);
         navigate('/');
     }

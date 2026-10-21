@@ -28,6 +28,12 @@ export default function App() {
     function onAuthChange(userName, authState) {
         setAuthState(authState);
         setUserName(userName);
+        if (userName === '') {
+            localStorage.removeItem('userName');
+        }
+        else {
+            localStorage.setItem('userName', userName);
+        }
     }
 
     return (
