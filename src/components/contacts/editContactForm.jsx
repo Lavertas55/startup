@@ -18,7 +18,7 @@ export function EditContactForm({ onToggle }) {
 
                     <div className="btn-container">
                         <Button variant="success" type="button" id="save" onClick={() => updateContact()}>Save</Button>
-                        <button variant="danger" type="button" id="cancel" onClick={() => onToggle(false)}>Cancel</button>
+                        <Button variant="danger" type="button" id="cancel" onClick={() => onToggle(false)}>Cancel</Button>
                     </div>
 
                 </div>
