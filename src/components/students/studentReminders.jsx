@@ -1,12 +1,37 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
+
+import { useRealtimeData, removeReminder, addReminder } from '../../services/realtimeData';
+
+function currentDateTime() {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return date.toISOString().slice(0, 16);
+}
 
 export function StudentReminders() {
+    const { studentId = 'ccougar' } = useParams();
+    const { reminders } = useRealtimeData();
+    const [timestamp, setTimestamp] = React.useState(currentDateTime);
+
+    const studentReminders = reminders
+        .filter((reminder) => reminder.studentId === studentId)
+        .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+
     async function submitForm(event) {
         event.preventDefault();
+        addReminder({
+            id: String(Date.now()),
+            studentId,
+            timestamp,
+        });
+        setTimestamp(currentDateTime());
     }
 
     async function deleteReminder(event) {
-
+        const reminderId = event.target.id.slice('delete-'.length);
+        removeReminder(reminderId);
     }
     
     return (
@@ -34,23 +59,25 @@ export function StudentReminders() {
                             </thead>
             
                             <tbody className="table-group-divider">
-                                <tr>
-                                    <td>
-                                        <div className="reminder">
-                                            <span>9/26/2026 @ 1:00 PM</span>
-                                            <Button
-                                                variant="danger"
-                                                size="sm"
-                                                type="button" 
-                                                id="delete" 
-                                                aria-label="delete reminder"
-                                                onClick={deleteReminder}
-                                            >
-                                                Delete
-                                            </Button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {studentReminders.map((reminder) => (
+                                    <tr key={reminder.id}>
+                                        <td>
+                                            <div className="reminder">
+                                                <span>{new Date(reminder.timestamp).toLocaleString()}</span>
+                                                <Button
+                                                    variant='danger'
+                                                    size='sm'
+                                                    type='button'
+                                                    id={`delete-${reminder.id}`}
+                                                    aria-label="delete reminder"
+                                                    onClick={deleteReminder}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>

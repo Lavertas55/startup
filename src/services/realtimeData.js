@@ -19,10 +19,16 @@ const repeatedContact = {
     notes: 'Cosmo is behind on his homework. We discussed the late policy and worked to establish a plan to remember his assignments. We will talk again in one week.',
 };
 
+const repeatedReminder = {
+    studentId: 'ccougar',
+    timestamp: '2026-09-15T17:34',
+}
+
 let state = {
     courses: [{ id: 'cs111', ...repeatedCourse }],
     students: [{ id: 'ccougar', ...repeatedStudent }],
     contacts: [{ id: '1', ...repeatedContact }],
+    reminders: [{ id: '1', ...repeatedReminder }],
 };
 
 const listeners = new Set();
@@ -36,10 +42,19 @@ function appendRecord(collection, record) {
     notify();
 }
 
+function deleteRecord(collection, recordId) {
+    const index = state[collection].findIndex(record => record.id === recordId);
+    if (index > -1) {
+        state[collection].splice(index, 1);
+        notify();
+    }
+}
+
 const repeatedRecords = [
     { collection: 'courses', template: repeatedCourse, idPrefix: 'cs111-repeat' },
     { collection: 'students', template: repeatedStudent, idPrefix: 'ccougar-repeat' },
     { collection: 'contacts', template: repeatedContact, idPrefix: '1-repeat' },
+    { collection: 'reminders', template: repeatedReminder, idPrefix: '1-repeat' },
 ];
 let nextRecordIndex = 0;
 
@@ -103,4 +118,12 @@ export function updateContact(contact) {
         ),
     };
     notify();
+}
+
+export function addReminder(reminder) {
+    appendRecord('reminders', reminder);
+}
+
+export function removeReminder(reminderId) {
+    deleteRecord('reminders', reminderId);
 }
