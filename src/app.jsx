@@ -43,7 +43,13 @@ export default function App() {
                             onAuthChange={onAuthChange}
                         />
                     } />
-                    <Route path="/register" element={<Register />} />
+                    <Route path="/register" element={
+                        <Register
+                            userName={userName}
+                            authState={authState}
+                            onAuthChange={onAuthChange}    
+                        />
+                    } />
 
                     <Route path="/courses" element={<Courses />} />
                     <Route path="/course/:courseId" element={<Course />} />
