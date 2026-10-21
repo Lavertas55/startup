@@ -85,8 +85,15 @@ export function StudentReminders() {
                     <form className="mt-3" onSubmit={submitForm}>
                         <div className="input-group">
                             <label className="input-group-text" htmlFor="timestamp">Date:</label>
-                            <input className="form-control" type="datetime-local" id="timestamp" name="timestamp" />
-                            <button type="submit" className="btn btn-success">Add Reminder</button>
+                            <input
+                                className="form-control"
+                                type="datetime-local"
+                                id="timestamp"
+                                name="timestamp"
+                                value={timestamp}
+                                onChange={(e) => setTimestamp(e.target.value)}
+                            />
+                            <Button type="submit" variant="success">Add Reminder</Button>
                         </div>
                     </form>
                 </div>
