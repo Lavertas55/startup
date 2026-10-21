@@ -10,7 +10,7 @@ export function Course() {
         <main className="container-fluid bg-secondary text-center">
             <div>
                 {!formVisible && (
-                    <StudentTable onToggle={setFormVisible} />
+                    <StudentTable courseView onToggle={setFormVisible} />
                 )}
 
                 {formVisible && (

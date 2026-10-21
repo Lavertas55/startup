@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { useRealtimeData } from '../../services/realtimeData';
 
 export function CourseTable({ onToggle }) {
+    const { courses, students } = useRealtimeData();
+
     return (
         <div className="card rounded-3 mb-3" id="courses-table">
             <div className="card-header">
@@ -32,11 +35,13 @@ export function CourseTable({ onToggle }) {
                     </thead>
 
                     <tbody className="table-group-divider">
-                        <tr>
-                            <th scope="row">CS 111</th>
-                            <td><Link className="text-reset" to="/course/cs111">Introduction to Computer Science</Link></td>
-                            <td>100</td>
-                        </tr>
+                        {courses.map((course) => (
+                            <tr key={course.id}>
+                                <th scope="row">{course.code}</th>
+                                <td><Link className="text-reset" to={`/course/${course.id}`}>{course.name}</Link></td>
+                                <td>{students.filter((student) => student.courseIds.includes(course.id)).length}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

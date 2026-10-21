@@ -1,13 +1,24 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
+import { addStudent, useRealtimeData } from '../../services/realtimeData';
 
 export function AddStudentForm({ onToggle }) {
+    const { courseId: routeCourseId } = useParams();
+    const { courses } = useRealtimeData();
     const [netId, setNetId] = React.useState('');
     const [studentName, setStudentName] = React.useState('');
-    const [className, setClassName] = React.useState('');
+    const [classId, setClassId] = React.useState(routeCourseId || '');
     
     async function submitForm(event) {
         event.preventDefault();
+        if (!netId.trim() || !studentName.trim()) return;
+        const courseIds = classId ? [classId] : [];
+        addStudent({
+            id: netId.trim().toLowerCase(),
+            name: studentName.trim(),
+            courseIds,
+        });
         onToggle(false);
     }
 
@@ -52,11 +63,13 @@ export function AddStudentForm({ onToggle }) {
                                     <select
                                         id="inputClass"
                                         className="form-select"
-                                        value={className}
-                                        onChange={(e) => setClassName(e.target.value)}
+                                        value={classId}
+                                        onChange={(e) => setClassId(e.target.value)}
                                     >
-                                        <option defaultValue>Choose...</option>
-                                        <option>CS 111: Introduction to Computer Science</option>
+                                        <option value="">Choose...</option>
+                                        {courses.map((course) => (
+                                            <option key={course.id} value={course.id}>{course.code}: {course.name}</option>
+                                        ))}
                                     </select>
                                 </div>
                     

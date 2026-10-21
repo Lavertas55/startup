@@ -1,15 +1,19 @@
 import Button from 'react-bootstrap/Button';
+import { useRealtimeData } from '../../services/realtimeData';
 
-export function ContactInfo({ onToggle }) {
+export function ContactInfo({ contact, onToggle }) {
+    const timestamp = new Date(contact.timestamp).toLocaleString();
+    const { students } = useRealtimeData();
+    const student = students.find((item) => item.id === contact.studentId);
     return (
         <div className="card rounded-3 mb-3">
             <div className="card-header">
                 <div className="table-title-container">
                     <div className="table-title">
-                        <h1>Cosmo Cougar</h1>
+                        <h1>{student?.name ?? contact.studentId}</h1>
 
                         <div className="table-subtitle">
-                            <h4>ccougar</h4>
+                            <h4>NetID: {contact.studentId}</h4>
                         </div>
                     </div>
                     
@@ -25,27 +29,25 @@ export function ContactInfo({ onToggle }) {
                     <tbody>
                         <tr>
                             <th>Timestamp:</th> 
-                            <td>9/15/2026 @ 5:34 PM</td>
+                            <td>{timestamp}</td>
                         </tr>
                         <tr>
                             <th>Instructor:</th>
-                            <td>Shane Reese</td>
+                            <td>{contact.instructor}</td>
                         </tr>
                         <tr>
                             <th>Method:</th>
-                            <td>Email</td>
+                            <td>{contact.method}</td>
                         </tr>
                         <tr>
                             <th>Success:</th>
-                            <td><input className="form-check-input" type="checkbox" id="success" name="success" defaultChecked disabled /></td>
+                            <td><input className="form-check-input" type="checkbox" id="success" name="success" checked={contact.success} readOnly disabled /></td>
                         </tr>
                         <tr>
                             <th>Notes:</th>
                             <td>
                                 <p>
-                                    Cosmo is behind on his homework. We discussed the late policy
-                                    and worked to establish a plan to remember his assignments.
-                                    We will talk again in one week.
+                                    {contact.notes}
                                 </p>
                             </td>
                         </tr>

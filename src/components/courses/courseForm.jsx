@@ -1,9 +1,23 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import { addCourse } from '../../services/realtimeData';
 
 export function AddCourseForm({ onToggle }) {
     const [className, setClassName] = React.useState('');
     const [classCode, setClassCode] = React.useState('');
+
+    function submitForm(event) {
+        event.preventDefault();
+        if (!className.trim() || !classCode.trim()) return;
+
+        const code = classCode.trim();
+        addCourse({
+            id: code.toLowerCase().replace(/[^a-z0-9]+/g, ''),
+            code,
+            name: className.trim(),
+        });
+        onToggle(false);
+    }
 
     return (
         <div className="card rounded-3">
@@ -12,7 +26,7 @@ export function AddCourseForm({ onToggle }) {
             </div>
 
             <div className="card-body">
-                <form id="add-course">                    
+                <form id="add-course" onSubmit={submitForm}>                    
                     <div className="input-group mb-3">
                         <label className="input-group-text" htmlFor="class-code">Class Code:</label>
                         <input
@@ -41,7 +55,6 @@ export function AddCourseForm({ onToggle }) {
                         <Button
                             variant="success"
                             type="submit"
-                            onClick={() => onToggle(false)}
                         >
                             Add
                         </Button>
