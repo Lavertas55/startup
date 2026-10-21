@@ -64,7 +64,14 @@ export function StudentContacts() {
                             </div>
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-instructor">Instructor</label>
-                                <input className="form-control" id="contact-instructor" value={instructor} onChange={(event) => setInstructor(event.target.value)} />
+                                <select className="form-select" id="contact-instructor" value={instructor} onChange={(event) => setInstructor(event.target.value)}>
+                                    <optgroup label="Instructors">
+                                        <option value="Shane Reese">Shane Reese</option>
+                                    </optgroup>
+                                    <optgroup label="TA">
+                                        <option value="Collin Mickelson">Collin Mickelson</option>
+                                    </optgroup>
+                                </select>
                             </div>
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-method">Method</label>
