@@ -15,13 +15,13 @@ export function Unauthenticated(props) {
     return (
         <div className="card-body">
             <div className="input-group mb-3">
-                <span className="input-group-text">@</span>
+                <span className="input-group-text">👤</span>
                 <input 
                     className="form-control"
-                    type="email"
+                    type="text"
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    placeholder="you@example.com"
+                    placeholder="username"
                 />
             </div>
             <div className="input-group mb-3">
