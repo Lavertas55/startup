@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
-export function RegisterForm() {
-    const [email, setEmail] = React.useState('');
+export function RegisterForm({userName, onRegistration}) {
+    const [registerUserName, setUserName] = React.useState(userName);
     const [password, setPassword] = React.useState('');
     const [verifyPassword, setVerifyPassword] = React.useState('');
     const [verifyPasswordTouched, setVerifyPasswordTouched] = React.useState(false);
@@ -12,7 +12,9 @@ export function RegisterForm() {
 
     async function submitForm(event) {
         event.preventDefault();
-        navigator("/courses");
+        localStorage.setItem("userName", registerUserName);
+        onRegistration(registerUserName);
+        navigator("/");
     }
 
     return (
@@ -23,13 +25,13 @@ export function RegisterForm() {
             <div className="card-body">
                 <form onSubmit={submitForm}>
                     <div className="input-group mb-3">
-                        <span className="input-group-text">@</span>
+                        <span className="input-group-text">👤</span>
                         <input 
                             className="form-control"
-                            type="email"
-                            placeholder="you@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            placeholder="username"
+                            value={registerUserName}
+                            onChange={(e) => setUserName(e.target.value)}
                         />
                     </div>
                     <div className="input-group mb-3">
@@ -61,7 +63,7 @@ export function RegisterForm() {
                     <Button
                         variant='primary'
                         type="submit"
-                        disabled={!email || !password || !verifyPassword || verifyPassword !== password}
+                        disabled={!registerUserName || !password || !verifyPassword || verifyPassword !== password}
                     >
                         Register
                     </Button>
