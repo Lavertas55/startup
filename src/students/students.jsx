@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StudentTable } from '../components/courses/studentTable';
+import { StudentTable } from '../components/students/studentTable';
 import { AddStudentForm } from '../components/students/addStudentForm';
 
 export function Students() {
