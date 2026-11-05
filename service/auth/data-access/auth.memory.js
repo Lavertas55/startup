@@ -9,7 +9,7 @@ function createMemoryAuthDao(store) {
         },
 
         async addUser(user) {
-            if(this.findUser(userName, user.userName)) {
+            if(await this.findUser('userName', user.userName)) {
                 throw new UserTakenError(
                     `User ${user.userName} already exists`
                 );
