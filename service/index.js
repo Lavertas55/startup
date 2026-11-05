@@ -20,8 +20,8 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 // Register API Endpoints
-apiRouter.post('/auth/register', authHandlers.registerHandler);
-apiRouter.post('/auth/login', authHandlers.loginHandler);
+apiRouter.post('/auth/register', authHandlers.registerHandler.bind(authHandlers));
+apiRouter.post('/auth/login', authHandlers.loginHandler.bind(authHandlers));
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
 // Register Error Handler
