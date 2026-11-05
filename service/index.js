@@ -13,7 +13,6 @@ const { authHandlers } = buildContainer();
 // Register Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(errorHandler);
 
 // Serve react page
 app.use(express.static('public'));
@@ -25,6 +24,6 @@ apiRouter.post('/auth/login', authHandlers.registerHandler);
 apiRouter.post('/auth/login', authHandlers.loginHandler);
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
-
+app.use(errorHandler());
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));

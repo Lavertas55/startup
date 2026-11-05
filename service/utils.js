@@ -1,4 +1,5 @@
 const { createAuthHandlers } = require("./auth/auth.handler");
+const { createAuthService } = require("./auth/auth.service");
 const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
 const { createMemoryStore } = require("./data/memory-store");
 const { UserTakenError } = require("./errors/user-taken");
@@ -18,15 +19,17 @@ function buildContainer() {
     return { authHandlers };
 }
 
-function errorHandler(err, req, res, next) {
-    if (err instanceof UserTakenError) {
-        res.status(409);
-    } else if (err instanceof UnauthorizedError) {
-        res.status(401);
-    } else {
-        res.status(500);
-    }
-    res.send({ msg: `${err.message}`});
+function errorHandler() {
+    return (err, req, res, next) => {
+        if (err instanceof UserTakenError) {
+            res.status(409);
+        } else if (err instanceof UnauthorizedError) {
+            res.status(401);
+        } else {
+            res.status(500);
+        }
+        res.send({ type: err.name, msg: err.message });
+    };
 }
 
 module.exports = { buildContainer, errorHandler };
