@@ -4,6 +4,7 @@ const uuid = require('uuid');
 
 const authRouter = express.Router();
 const pathPrefix = '/auth';
+const authCookieName = 'token';
 
 function createAuthService(authDao) {
     return {
