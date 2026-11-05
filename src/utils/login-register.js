@@ -1,12 +1,4 @@
-export async function loginUser(userName, password, onLogin, onError) {
-    loginOrCreate(`/api/auth/login`, userName, password, onLogin, onError);
-}
-
-export async function registerUser(userName, password, onLogin, onError) {
-    loginOrCreate(`/api/auth/register`, userName, password, onLogin, onError);
-}
-
-async function loginOrCreate(endpoint, userName, password, onLogin, onError) {
+export async function loginOrRegister(endpoint, userName, password, onLogin, onError) {
     const response = await fetch(endpoint, {
         method: 'post',
         body: JSON.stringify({ userName: userName, password: password }),

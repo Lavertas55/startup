@@ -2,7 +2,7 @@ import React from 'react';
 
 import Button from 'react-bootstrap/Button';
 
-import { loginUser } from './utils';
+import { loginOrRegister } from '../utils/login-register';
 import { MessageDialog } from './messageDialog';
 
 export function Unauthenticated(props) {
@@ -10,8 +10,14 @@ export function Unauthenticated(props) {
     const [password, setPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
     
-    const submit = () => {
-        loginUser(userName, password, props.onLogin, setDisplayError);
+    const loginUser = () => {
+        loginOrRegister(
+            `/api/auth/login`,
+            userName,
+            password,
+            props.onLogin,
+            setDisplayError
+        );
     }
 
     return (
@@ -38,7 +44,7 @@ export function Unauthenticated(props) {
                     />
                 </div>
 
-                <Button variant="primary" onClick={() => submit()} disabled={!userName || !password}>
+                <Button variant="primary" onClick={() => loginUser()} disabled={!userName || !password}>
                     Login
                 </Button>
             </div>
