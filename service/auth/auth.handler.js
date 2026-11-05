@@ -21,7 +21,7 @@ function createAuthHandlers(authService, authCookieName) {
         },
 
         async logoutHandler(req, res) {
-            await authService.logoutUser(req.body.token);
+            await authService.logoutUser(req.cookies[authCookieName]);
 
             res.clearCookie(authCookieName);
             res.status(204).end();
