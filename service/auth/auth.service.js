@@ -4,9 +4,8 @@ const uuid = require('uuid');
 
 const authRouter = express.Router();
 const pathPrefix = '/auth';
-const authCookieName = 'token';
 
-function createAuthService(authDao) {
+function createAuthService(authDao, authCookieName) {
     return {
         async registerUser(userName, password) {
             const passwordHash = await bcrypt.hash(password, 10);
@@ -17,13 +16,13 @@ function createAuthService(authDao) {
                 token: uuid.v4(),
             };
 
-            authDao.addUser(user);
+            await authDao.addUser(user);
 
             return user;
         },
 
         async loginUser(userName, password) {
-            const user = authDao.findUser('userName', userName);
+            const user = await authDao.findUser('userName', userName);
             if (user) {
                 if (await bcrypt.compare(password, user.password)) {
                     user.token = uuid.v4();
@@ -32,6 +31,13 @@ function createAuthService(authDao) {
             }
 
             throw new UnauthorizedError('Unauthorized');
+        },
+
+        async logoutUser(authToken) {
+            const user = await authDao.findUser('token', authToken);
+            if (user) {
+                delete user.token;
+            }
         },
 
         setAuthCookie(res, authToken) {

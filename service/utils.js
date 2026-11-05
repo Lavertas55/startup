@@ -4,14 +4,16 @@ const { createMemoryStore } = require("./data/memory-store");
 const { UserTakenError } = require("./errors/user-taken");
 const { UnauthorizedError } = require("./errors/unauthorized");
 
+const authCookieName = 'token';
+
 function buildContainer() {
     const memoryStore = createMemoryStore();
 
     const authDao = createMemoryAuthDao(memoryStore);
 
-    const authService = createAuthService(authDao);
+    const authService = createAuthService(authDao, authCookieName);
 
-    const authHandlers = createAuthHandlers(authService);
+    const authHandlers = createAuthHandlers(authService, authCookieName);
 
     return { authHandlers };
 }

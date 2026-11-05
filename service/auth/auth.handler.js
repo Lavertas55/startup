@@ -1,4 +1,4 @@
-function createAuthHandlers(authService) {
+function createAuthHandlers(authService, authCookieName) {
     return {
         async registerHandler(req, res) {
             const user = await authService.registerUser(
@@ -18,9 +18,15 @@ function createAuthHandlers(authService) {
 
             authService.setAuthCookie(res, user.token);
             res.send({ userName: user.email });
+        },
+
+        async logoutHandler(req, res) {
+            await authService.logoutUser(req.body.token);
+
+            res.clearCookie(authCookieName);
+            res.status(204).end();
         }
     }
 }
-
 
 module.exports = { createAuthHandlers };
