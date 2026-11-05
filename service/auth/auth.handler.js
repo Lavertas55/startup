@@ -26,6 +26,11 @@ function createAuthHandlers(authService, authCookieName) {
             res.clearCookie(authCookieName);
             res.status(204).end();
         },
+
+        verifyAuth: async (req, res, next) => {
+            await authService.validateAuth(req.cookies[authCookieName]);
+        },
+
         setAuthCookie(res, authToken) {
             res.cookie(authCookieName, authToken, {
                 maxAge: 1000 * 60 * 60 * 24 * 365,
