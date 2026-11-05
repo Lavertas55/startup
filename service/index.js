@@ -20,7 +20,7 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
-apiRouter.post('/auth/login', authHandlers.registerHandler);
+apiRouter.post('/auth/register', authHandlers.registerHandler);
 apiRouter.post('/auth/login', authHandlers.loginHandler);
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
