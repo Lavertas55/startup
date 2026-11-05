@@ -2,6 +2,7 @@ const { createAuthHandlers } = require("./auth/auth.handler");
 const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
 const { createMemoryStore } = require("./data/memory-store");
 const { UserTakenError } = require("./errors/user-taken");
+const { UnauthorizedError } = require("./errors/unauthorized");
 
 function buildContainer() {
     const memoryStore = createMemoryStore();
@@ -18,6 +19,8 @@ function buildContainer() {
 function errorHandler(err, req, res, next) {
     if (err instanceof UserTakenError) {
         res.status(409);
+    } else if (err instanceof UnauthorizedError) {
+        res.status(401);
     } else {
         res.status(500);
     }

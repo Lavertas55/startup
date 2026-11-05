@@ -23,20 +23,7 @@ var apiRouter = express.Router();
 app.use('/api', apiRouter);
 
 apiRouter.post('/auth/login', authHandlers.registerHandler);
-
-apiRouter.post('/auth/login', async (req, res) => {
-    const user = await findUser('userName', req.body.userName);
-    if (user) {
-        if (await bcrypt.compare(req.body.password, user.password)) {
-            user.token = uuid.v4();
-            setAuthCookie(res, user.token);
-            res.send({ userName: user.userName });
-            return;
-        }
-    }
-
-    res.status(401).send({ msg: 'Unauthorized' });
-});
+apiRouter.post('/auth/login', authHandlers.loginHandler);
 
 apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);

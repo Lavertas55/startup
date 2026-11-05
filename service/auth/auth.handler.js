@@ -15,6 +15,9 @@ function createAuthHandlers(authService) {
                 req.body.userName,
                 req.body.password
             );
+
+            authService.setAuthCookie(res, user.token);
+            res.send({ userName: user.email });
         }
     }
 }
