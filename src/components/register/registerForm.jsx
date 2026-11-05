@@ -2,19 +2,35 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 
-export function RegisterForm({userName, onRegistration}) {
+import { loginOrRegister } from '../../utils/login-register';
+
+export function RegisterForm({userName, onRegistration, onError}) {
     const [registerUserName, setUserName] = React.useState(userName);
     const [password, setPassword] = React.useState('');
     const [verifyPassword, setVerifyPassword] = React.useState('');
     const [verifyPasswordTouched, setVerifyPasswordTouched] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
 
     const navigator = useNavigate();
 
+    const onSuccess = (userName) => {
+        onRegistration(userName);
+        setSuccess(true);
+    }
+
     async function submitForm(event) {
         event.preventDefault();
-        localStorage.setItem("userName", registerUserName);
-        onRegistration(registerUserName);
-        navigator("/");
+        loginOrRegister(
+            `/api/auth/register`,
+            registerUserName,
+            password,
+            onSuccess,
+            onError
+        );
+
+        if (success) {
+            navigator("/");
+        }
     }
 
     return (
