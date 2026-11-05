@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const { UnauthorizedError } = require('../errors/unauthorized');
 
 const authRouter = express.Router();
 const pathPrefix = '/auth';
