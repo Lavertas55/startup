@@ -25,6 +25,7 @@ function createMemoryAuthDao(store) {
             }
 
             store.users.push(user);
+            return user;
         },
     };
 }

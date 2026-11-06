@@ -7,9 +7,7 @@ function createAuthService(authDao) {
         async registerUser(userName, password) {
             const passwordHash = await bcrypt.hash(password, 10);
 
-            await authDao.addUser(userName, passwordHash, uuid.v4());
-
-            return user;
+            return await authDao.addUser(userName, passwordHash, uuid.v4());
         },
 
         async loginUser(userName, password) {
