@@ -3,9 +3,6 @@ const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
 const { UnauthorizedError } = require('../errors/unauthorized');
 
-const authRouter = express.Router();
-const pathPrefix = '/auth';
-
 function createAuthService(authDao) {
     return {
         async registerUser(userName, password) {
