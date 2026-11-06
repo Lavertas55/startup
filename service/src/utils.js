@@ -2,14 +2,14 @@ const { createAuthHandlers } = require("./auth/auth.handler");
 const { createAuthService } = require("./auth/auth.service");
 const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
 
-const { createCourseHandlers } = require("./courses/courses.handler");
-const { createCourseService } = require("./courses/courses.service");
-const { createMemoryCourseDao } = require("./courses/data-access/courses.memory");
+const { createCourseHandlers } = require("./features/courses/courses.handler");
+const { createCourseService } = require("./features/courses/courses.service");
+const { createMemoryCourseDao } = require("./features/courses/data-access/courses.memory");
 
-const { createMemoryStudentDao } = require("./students/data-access/students.memory");
+const { createMemoryStudentDao } = require("./features/students/data-access/students.memory");
 
-const { createStudentHandlers } = require("./students/students.handler");
-const { createStudentService } = require("./students/students.service");
+const { createStudentHandlers } = require("./features/students/students.handler");
+const { createStudentService } = require("./features/students/students.service");
 const { createMemoryStore } = require("./data/memory-store");
 
 const { RecordConflictError } = require("./errors/record-conflict");

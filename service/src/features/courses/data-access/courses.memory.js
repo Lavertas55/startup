@@ -1,4 +1,4 @@
-const { RecordConflictError } = require("../../errors/record-conflict");
+const { RecordConflictError } = require("../../../errors/record-conflict");
 
 function createMemoryCourseDao(store) {
     return {
@@ -14,8 +14,8 @@ function createMemoryCourseDao(store) {
 
         async addCourse(className, classCode) {
             const course = {
-                courseName: className,
-                courseCode: classCode,
+                id: classCode,
+                name: className,
                 students: []
             }
 

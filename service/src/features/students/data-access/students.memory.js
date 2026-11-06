@@ -1,4 +1,4 @@
-const { RecordConflictError } = require("../../errors/record-conflict");
+const { RecordConflictError } = require("../../../errors/record-conflict");
 
 function createMemoryStudentDao(store) {
     return {
