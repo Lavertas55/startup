@@ -11,13 +11,7 @@ function createAuthService(authDao) {
         async registerUser(userName, password) {
             const passwordHash = await bcrypt.hash(password, 10);
 
-            const user = {
-                userName: userName,
-                password: passwordHash,
-                token: uuid.v4(),
-            };
-
-            await authDao.addUser(user);
+            await authDao.addUser(userName, passwordHash, uuid.v4());
 
             return user;
         },
