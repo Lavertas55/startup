@@ -1,11 +1,11 @@
-const { ClassTakenError } = require("../../errors/class-taken");
+const { RecordConflictError } = require("../../errors/record-conflict");
 
 function createMemoryCourseDao(store) {
     return {
         async findCourse(field, value) {
             if (!value) return null;
 
-            return store.courses.find((u) => u[field] === value);
+            return store.courses.find((c) => c[field] === value);
         },
 
         async getCourses() {
@@ -20,7 +20,7 @@ function createMemoryCourseDao(store) {
             }
 
             if (await this.findCourse('courseCode', course.courseCode)) {
-                throw new ClassTakenError(
+                throw new RecordConflictError(
                     `Course ${course.courseCode} already taken`
                 );
             }

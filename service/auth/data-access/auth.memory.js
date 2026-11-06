@@ -1,6 +1,6 @@
 const uuid = require("uuid");
 
-const { UserTakenError } = require("../../errors/user-taken");
+const { RecordConflictError } = require("../../errors/record-conflict");
 
 function createMemoryAuthDao(store) {
     return {
@@ -19,7 +19,7 @@ function createMemoryAuthDao(store) {
             }
 
             if(await this.findUser('userName', user.userName)) {
-                throw new UserTakenError(
+                throw new RecordConflictError(
                     `User ${user.userName} already exists`
                 );
             }
