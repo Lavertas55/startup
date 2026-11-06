@@ -2,6 +2,7 @@ function createMemoryStore() {
     return {
         users: [],
         courses: [],
+        students: [],
     };
 }
 
