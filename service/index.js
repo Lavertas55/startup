@@ -25,7 +25,8 @@ apiRouter.post('/auth/login', authHandlers.loginHandler.bind(authHandlers));
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
 // Register Class Endpoint
-apiRouter.post('/course', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
+apiRouter.get('/courses', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
+apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
 
 // Register Error Handler
 app.use(errorHandler());
