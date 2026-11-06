@@ -7,7 +7,7 @@ export function CourseTable({ onToggle }) {
     const [courses, setCourses] = React.useState([]);
 
     React.useEffect(() => {
-        fetch('/api/course')
+        fetch('/api/courses')
             .then((response) => response.json())
             .then((courses) => {
                 setCourses(courses);
