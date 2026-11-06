@@ -9,7 +9,7 @@ export function CourseTable({ onToggle }) {
     React.useEffect(() => {
         fetch('/api/courses')
             .then((response) => response.json())
-            .then((courses) => {
+            .then(({ courses }) => {
                 setCourses(courses);
             });
     }, []);
@@ -58,7 +58,7 @@ export function CourseTable({ onToggle }) {
                         <tr>
                             <th scope="col">Code</th>
                             <th scope="col">Name</th>
-                            <th scope="col">&num; Students</th>
+                            <th scope="col"># Students</th>
                         </tr>
                     </thead>
 
