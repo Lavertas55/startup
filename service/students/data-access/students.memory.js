@@ -9,13 +9,17 @@ function createMemoryStudentDao(store) {
         },
 
         async getStudentsByCourse(courseCode) {
-            if (!value) return null;
+            if (!courseCode) return null;
 
             return store.students.filter((s) => s.courses.includes[courseCode]);
         },
 
+        async getAllStudents() {
+            return store.students;
+        },
+
         async addStudent(id, name, courses) {
-            if (this.findStudent('name', name)) {
+            if (await this.findStudent('id', id)) {
                 throw new RecordConflictError(`Student ${id} already taken`);
             }
 
