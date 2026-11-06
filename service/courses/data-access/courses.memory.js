@@ -1,16 +1,18 @@
+const { ClassTakenError } = require("../../errors/class-taken");
+
 function createMemoryCourseDao(store) {
     return {
         async findCourse(field, value) {
             if (!value) return null;
 
-            return store.users.find((u) => u[field] === value);
+            return store.courses.find((u) => u[field] === value);
         },
 
-        async getCourse() {
-            return store.users.courses;
+        async getCourses() {
+            return store.courses;
         },
 
-        async addClass(className, classCode) {
+        async addCourse(className, classCode) {
             const course = {
                 courseName: className,
                 courseCode: classCode
@@ -22,7 +24,7 @@ function createMemoryCourseDao(store) {
                 );
             }
 
-            store.classes.push(course);
+            store.courses.push(course);
             return course;
         }
     }
