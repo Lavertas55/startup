@@ -12,7 +12,7 @@ function createCourseHandlers(classService) {
         async getCoursesHandler(req, res) {
             const courseList = await classService.getCourses();
 
-            req.send({ courses: courseList });
+            res.send({ courses: courseList });
         }
     };
 }
