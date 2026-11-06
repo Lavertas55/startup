@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-export function CourseTable({ onToggle }) {
+export function CourseTable({ onToggle, refreshKey }) {
     const [courses, setCourses] = React.useState([]);
 
     React.useEffect(() => {
@@ -12,7 +12,7 @@ export function CourseTable({ onToggle }) {
             .then(({ courses }) => {
                 setCourses(courses);
             });
-    }, []);
+    }, [refreshKey]);
 
     const courseRows = [];
     if (courses.length) {

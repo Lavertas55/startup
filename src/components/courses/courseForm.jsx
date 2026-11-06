@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { MessageDialog } from '../shared/messageDialog';
 
-export function AddCourseForm({ onToggle }) {
+export function AddCourseForm({ show, onToggle, onCourseAdded }) {
     const [courseName, setCourseName] = React.useState('');
     const [courseCode, setCourseCode] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
@@ -25,6 +26,7 @@ export function AddCourseForm({ onToggle }) {
         const body = await response.json();
 
         if (response?.status === 200) {
+            onCourseAdded();
             onToggle(false);
         } else {
             setDisplayError(`⚠ Error: ${body.msg}`)
@@ -34,13 +36,13 @@ export function AddCourseForm({ onToggle }) {
 
     return (
         <>
-            <div className="card rounded-3">
-                <div className="card-header">
-                    <h2>Add Course</h2>
-                </div>
+            <Modal show={show} centered onHide={() => onToggle(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add Course</Modal.Title>
+                </Modal.Header>
 
-                <div className="card-body">
-                    <form id="add-course" onSubmit={submitForm}>                    
+                <Modal.Body>
+                    <form id="add-course" onSubmit={submitForm}>
                         <div className="input-group mb-3">
                             <label className="input-group-text" htmlFor="class-code">Class Code:</label>
                             <input
@@ -49,7 +51,7 @@ export function AddCourseForm({ onToggle }) {
                                 value={courseCode}
                                 onChange={(e) => setCourseCode(e.target.value)}
                                 id="class-code"
-                                name="class-code" 
+                                name="class-code"
                             />
                         </div>
 
@@ -61,29 +63,26 @@ export function AddCourseForm({ onToggle }) {
                                 value={courseName}
                                 onChange={(e) => setCourseName(e.target.value)}
                                 id="name"
-                                name="name" 
+                                name="name"
                             />
                         </div>
-
-                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <Button
-                                variant="success"
-                                type="submit"
-                            >
-                                Add
-                            </Button>
-                            <Button
-                                variant="danger" 
-                                type="button"
-                                onClick={() => onToggle(false)}
-                                id="cancel-add"
-                            >
-                                Cancel
-                            </Button>
-                        </div>
                     </form>
-                </div>
-            </div>
+                </Modal.Body>
+
+                <Modal.Footer>
+                    <Button variant="success" type="submit" form="add-course">
+                        Add
+                    </Button>
+                    <Button
+                        variant="secondary"
+                        type="button"
+                        onClick={() => onToggle(false)}
+                        id="cancel-add"
+                    >
+                        Cancel
+                    </Button>
+                </Modal.Footer>
+            </Modal>
 
             <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
         </>
