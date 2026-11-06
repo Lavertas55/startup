@@ -5,17 +5,18 @@ import { AddStudentForm } from '../components/shared/addStudentForm';
 
 export function Students() {
     const [formVisible, setFormVisible] = React.useState(false);
+    const [refreshKey, setCourseRefreshKey] = React.useState(0);
 
     return (
         <main className="container-fluid bg-secondary text-center">
             <div>
-                {!formVisible && (
-                    <StudentTable onToggle={setFormVisible} />
-                )}
+                <StudentTable onToggle={setFormVisible} refreshKey={refreshKey} />
 
-                {formVisible && (
-                    <AddStudentForm onToggle={setFormVisible} />
-                )}
+                <AddStudentForm 
+                    show={formVisible}
+                    onToggle={setFormVisible}
+                    onStudentAdded={() => setCourseRefreshKey((key) => key + 1) } 
+                />
             </div>
         </main>
     );

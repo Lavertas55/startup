@@ -6,25 +6,40 @@ import { useParams } from 'react-router-dom';
 import { addStudent, useRealtimeData } from '../../services/realtimeData';
 import { MessageDialog } from './messageDialog';
 
-export function AddStudentForm({ show, onToggle }) {
+export function AddStudentForm({ show, onToggle, onStudentAdded }) {
     const { courseId: routeCourseId } = useParams();
     const { courses } = useRealtimeData();
 
     const [displayError, setDisplayError] = React.useState(null);
     const [netId, setNetId] = React.useState('');
     const [studentName, setStudentName] = React.useState('');
-    const [classId, setClassId] = React.useState(routeCourseId || '');
+    const [courseId, setClassId] = React.useState(routeCourseId || '');
     
     async function submitForm(event) {
         event.preventDefault();
-        if (!netId.trim() || !studentName.trim()) return;
-        const courseIds = classId ? [classId] : [];
-        addStudent({
-            id: netId.trim().toLowerCase(),
-            name: studentName.trim(),
-            courseIds,
+        if (!netId.trim() || !studentName.trim() || !courseId.trim()) return;
+
+        const course = courseId.trim();
+        const id = netId.trim();
+        const student = {
+            id: id,
+            name: studentName,
+            classes: [course] 
+        };
+
+        const response = await fetch('/api/student', {
+            method: "post",
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+            body: JSON.stringify(student)
         });
-        onToggle(false);
+        const body = await response.json();
+
+        if (response?.status === 200) {
+            onStudentAdded();
+            onToggle(false);
+        } else {
+            setDisplayError(`⚠ Error: ${body.msg}`)
+        }
     }
 
     return (
@@ -36,7 +51,7 @@ export function AddStudentForm({ show, onToggle }) {
 
                 <Modal.Body>
 
-                    <form onSubmit={submitForm}>
+                    <form id="add-student" onSubmit={submitForm}>
                         <div className="row g-3">
                             <div className="col-12 col-md-6">
                                 <label className="form-label" htmlFor="netid">Net ID:</label>
@@ -69,7 +84,7 @@ export function AddStudentForm({ show, onToggle }) {
                                 <select
                                     id="inputClass"
                                     className="form-select"
-                                    value={classId}
+                                    value={courseId}
                                     onChange={(e) => setClassId(e.target.value)}
                                 >
                                     <option value="">Choose...</option>

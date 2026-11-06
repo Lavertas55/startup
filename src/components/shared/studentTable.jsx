@@ -17,13 +17,13 @@ export function StudentTable({ onToggle, refreshKey}) {
                     setCourse(course);
                 });
 
-            fetch(`/api/students?course=${courseId}`)
+            fetch(`/api/student?course=${courseId}`)
                 .then((response) => response.json())
                 .then(({ students }) => {
                     setStudents(students);
                 });
         } else {
-            fetch('/api/students')
+            fetch('/api/student')
                 .then((response) => response.json())
                 .then(({ students }) => {
                     setStudents(students);
@@ -40,7 +40,7 @@ export function StudentTable({ onToggle, refreshKey}) {
                     <td>
                         <Link
                             className="text-reset"
-                            to={`/student/${student.id}{courseId ? '?course=${courseId}' : ''}`}
+                            to={`/student/${student.id}${courseId ? '?course=${courseId}' : ''}`}
                         >
                             {student.name}
                         </Link>
@@ -85,6 +85,7 @@ export function StudentTable({ onToggle, refreshKey}) {
                     </thead>
         
                     <tbody className="table-group-divider">
+                        {studentRows}
                     </tbody>
                 </table>
             </div>
