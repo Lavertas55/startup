@@ -12,6 +12,6 @@ export async function loginOrRegister(endpoint, userName, password, onLogin, onE
         onLogin(userName);
     } else {
         const body = await response.json();
-        onError(`⚠ Error: ${body.msg}`)
+        onError(`⚠ Error: ${body.msg}`);
     }
 }
