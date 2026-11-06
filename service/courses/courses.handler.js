@@ -6,7 +6,7 @@ function createCourseHandlers(classService) {
                 req.body.courseCode
             );
 
-            res.send({ courseName: course.courseName, courseCode: course.courseCode });
+            res.send({ courseCode: course.courseCode });
         },
 
         async getCoursesHandler(req, res) {
