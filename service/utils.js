@@ -10,6 +10,7 @@ const { createMemoryStore } = require("./data/memory-store");
 
 const { UserTakenError } = require("./errors/user-taken");
 const { UnauthorizedError } = require("./errors/unauthorized");
+const { ClassTakenError } = require("./errors/class-taken");
 
 const authCookieName = 'token';
 
@@ -30,7 +31,7 @@ function buildContainer() {
 
 function errorHandler() {
     return (err, req, res, next) => {
-        if (err instanceof UserTakenError) {
+        if (err instanceof UserTakenError || err instanceof ClassTakenError) {
             res.status(409);
         } else if (err instanceof UnauthorizedError) {
             res.status(401);
