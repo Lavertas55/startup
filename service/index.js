@@ -7,7 +7,7 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // Build Handlers
-const { authHandlers, courseHandlers } = buildContainer();
+const { authHandlers, courseHandlers, studentHandlers } = buildContainer();
 
 // Register Middleware
 app.use(express.json());
@@ -27,6 +27,11 @@ apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 // Register Class Endpoint
 apiRouter.get('/courses', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
 apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
+
+// Register Student Endpoint
+apiRouter.get('/student/:id', authHandlers.verifyAuth, studentHandlers.getStudentHandler);
+apiRouter.get('/student', authHandlers.verifyAuth, studentHandlers.getStudentsHandler);
+apiRouter.post('/student', authHandlers.verifyAuth, studentHandlers.addStudentHandler);
 
 // Register Error Handler
 app.use(errorHandler());
