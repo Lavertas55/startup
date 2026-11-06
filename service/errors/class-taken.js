@@ -4,3 +4,5 @@ class ClassTakenError extends Error {
         this.name = this.constructor.name;
     }
 }
+
+module.exports = { ClassTakenError };
