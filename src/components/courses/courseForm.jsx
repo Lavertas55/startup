@@ -16,7 +16,7 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
         const course = {
             courseName: courseName,
             courseCode: code
-        }
+        };
 
         const response = await fetch(`/api/courses`, {
                 method: 'post',
