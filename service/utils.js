@@ -6,9 +6,13 @@ const { createCourseHandlers } = require("./courses/courses.handler");
 const { createCourseService } = require("./courses/courses.service");
 const { createMemoryCourseDao } = require("./courses/data-access/courses.memory");
 
-const { createMemoryStore } = require("./data/memory-store");
-const { RecordConflictError } = require("./errors/record-conflict");
+const { createMemoryStudentDao } = require("./students/data-access/students.memory");
 
+const { createStudentHandlers } = require("./students/students.handler");
+const { createStudentService } = require("./students/students.service");
+const { createMemoryStore } = require("./data/memory-store");
+
+const { RecordConflictError } = require("./errors/record-conflict");
 const { UnauthorizedError } = require("./errors/unauthorized");
 
 const authCookieName = 'token';
@@ -18,14 +22,17 @@ function buildContainer() {
 
     const authDao = createMemoryAuthDao(memoryStore);
     const courseDao = createMemoryCourseDao(memoryStore);
+    const studentDao = createMemoryStudentDao(memoryStore);
 
     const authService = createAuthService(authDao, authCookieName);
     const courseService = createCourseService(courseDao);
+    const studentService = createStudentService(studentDao);
 
     const authHandlers = createAuthHandlers(authService, authCookieName);
     const courseHandlers = createCourseHandlers(courseService);
+    const studentHandlers = createStudentHandlers(studentService);
 
-    return { authHandlers, courseHandlers };
+    return { authHandlers, courseHandlers, studentHandlers };
 }
 
 function errorHandler() {
