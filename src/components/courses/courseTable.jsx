@@ -16,7 +16,7 @@ export function CourseTable({ onToggle, refreshKey }) {
 
     const courseRows = [];
     if (courses.length) {
-        for (const [i, course] of courses.entries()) {
+        for (const course of courses) {
             courseRows.push(
                 <tr key={course.courseCode}>
                     <th scope="row">{course.courseCode}</th>
