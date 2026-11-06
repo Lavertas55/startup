@@ -29,6 +29,7 @@ function createAuthHandlers(authService, authCookieName) {
 
         verifyAuth: async (req, res, next) => {
             await authService.validateAuth(req.cookies[authCookieName]);
+            next();
         },
 
         setAuthCookie(res, authToken) {
