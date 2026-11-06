@@ -15,7 +15,8 @@ function createMemoryCourseDao(store) {
         async addCourse(className, classCode) {
             const course = {
                 courseName: className,
-                courseCode: classCode
+                courseCode: classCode,
+                students: []
             }
 
             if (await this.findCourse('courseCode', course.courseCode)) {

@@ -20,8 +20,8 @@ export function CourseTable({ onToggle, refreshKey }) {
             courseRows.push(
                 <tr key={course.courseCode}>
                     <th scope="row">{course.courseCode}</th>
-                    <td>{course.courseName}</td>
-                    <td>0</td>
+                    <td><Link className="text-reset" to={`/course/${course.courseCode}`}>{course.courseName}</Link></td>
+                    <td>{course.students.length}</td>
                 </tr>
             );
         }
