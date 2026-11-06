@@ -1,6 +1,7 @@
 function createMemoryStore() {
     return {
         users: [],
+        classes: [],
     };
 }
 
