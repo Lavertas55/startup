@@ -25,7 +25,7 @@ function buildContainer() {
     const authHandlers = createAuthHandlers(authService, authCookieName);
     const courseHandlers = createCourseHandlers(courseService);
 
-    return { authHandlers, classHandlers: courseHandlers };
+    return { authHandlers, courseHandlers };
 }
 
 function errorHandler() {
