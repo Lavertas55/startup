@@ -2,9 +2,9 @@ const { createAuthHandlers } = require("./auth/auth.handler");
 const { createAuthService } = require("./auth/auth.service");
 const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
 
-const { createClassHandlers } = require("./classes/classes.handler");
-const { createClassService } = require("./classes/classes.service");
-const { createMemoryClassDao } = require("./classes/data-access/classes.memory");
+const { createCourseHandlers } = require("./courses/courses.handler");
+const { createCourseService } = require("./courses/courses.service");
+const { createMemoryCourseDao } = require("./courses/data-access/courses.memory");
 
 const { createMemoryStore } = require("./data/memory-store");
 
@@ -17,15 +17,15 @@ function buildContainer() {
     const memoryStore = createMemoryStore();
 
     const authDao = createMemoryAuthDao(memoryStore);
-    const classDao = createMemoryClassDao(memoryStore);
+    const courseDao = createMemoryCourseDao(memoryStore);
 
     const authService = createAuthService(authDao, authCookieName);
-    const classService = createClassService(classDao);
+    const courseService = createCourseService(courseDao);
 
     const authHandlers = createAuthHandlers(authService, authCookieName);
-    const classHandlers = createClassHandlers(classService);
+    const courseHandlers = createCourseHandlers(courseService);
 
-    return { authHandlers, classHandlers };
+    return { authHandlers, classHandlers: courseHandlers };
 }
 
 function errorHandler() {
