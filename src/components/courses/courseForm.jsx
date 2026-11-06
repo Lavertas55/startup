@@ -74,7 +74,7 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
                         Add
                     </Button>
                     <Button
-                        variant="secondary"
+                        variant="danger"
                         type="button"
                         onClick={() => onToggle(false)}
                         id="cancel-add"
