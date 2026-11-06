@@ -9,3 +9,5 @@ function createClassService(classDao) {
         }
     };
 }
+
+module.exports = { createClassService };

@@ -27,3 +27,5 @@ function createMemoryClassDao(store) {
         }
     }
 }
+
+module.exports = { createMemoryClassDao };

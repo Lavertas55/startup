@@ -16,3 +16,5 @@ function createClassHandlers(classService) {
         }
     };
 }
+
+module.exports = { createClassHandlers };

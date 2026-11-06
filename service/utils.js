@@ -1,7 +1,13 @@
 const { createAuthHandlers } = require("./auth/auth.handler");
 const { createAuthService } = require("./auth/auth.service");
 const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
+
+const { createClassHandlers } = require("./classes/classes.handler");
+const { createClassService } = require("./classes/classes.service");
+const { createMemoryClassDao } = require("./classes/data-access/classes.memory");
+
 const { createMemoryStore } = require("./data/memory-store");
+
 const { UserTakenError } = require("./errors/user-taken");
 const { UnauthorizedError } = require("./errors/unauthorized");
 
@@ -11,12 +17,15 @@ function buildContainer() {
     const memoryStore = createMemoryStore();
 
     const authDao = createMemoryAuthDao(memoryStore);
+    const classDao = createMemoryClassDao(memoryStore);
 
     const authService = createAuthService(authDao, authCookieName);
+    const classService = createClassService(classDao);
 
     const authHandlers = createAuthHandlers(authService, authCookieName);
+    const classHandlers = createClassHandlers(classService);
 
-    return { authHandlers };
+    return { authHandlers, classHandlers };
 }
 
 function errorHandler() {
