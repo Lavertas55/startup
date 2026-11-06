@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { StudentTable } from '../components/students/studentTable';
-import { AddStudentForm } from '../components/students/addStudentForm';
+import { StudentTable } from '../components/shared/studentTable';
+import { AddStudentForm } from '../components/shared/addStudentForm';
 
 export function Students() {
     const [formVisible, setFormVisible] = React.useState(false);
