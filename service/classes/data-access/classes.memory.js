@@ -6,6 +6,10 @@ function createMemoryClassDao(store) {
             return store.users.find((u) => u[field] === value);
         },
 
+        async getClasses() {
+            return store.users.classes;
+        },
+
         async addClass(className, classCode) {
             const classRecord = {
                 className: className,
