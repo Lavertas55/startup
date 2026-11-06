@@ -1,9 +1,37 @@
+import React from 'react';
+
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import { useRealtimeData } from '../../services/realtimeData';
 
 export function CourseTable({ onToggle }) {
-    const { courses, students } = useRealtimeData();
+    const [courses, setCourses] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('/api/course')
+            .then((response) => response.json())
+            .then((courses) => {
+                setCourses(courses);
+            });
+    }, []);
+
+    const courseRows = [];
+    if (courses.length) {
+        for (const [i, course] of courses.entries()) {
+            courseRows.push(
+                <tr key={course.courseCode}>
+                    <th scope="row">{course.courseCode}</th>
+                    <td>{course.courseName}</td>
+                    <td>0</td>
+                </tr>
+            );
+        }
+    } else {
+        courseRows.push(
+            <tr key='0'>
+                <td className='text-center' colSpan='3'>Create your first Course!</td>
+            </tr>
+        );
+    }
 
     return (
         <div className="card rounded-3 mb-3" id="courses-table">
@@ -35,13 +63,7 @@ export function CourseTable({ onToggle }) {
                     </thead>
 
                     <tbody className="table-group-divider">
-                        {courses.map((course) => (
-                            <tr key={course.id}>
-                                <th scope="row">{course.code}</th>
-                                <td><Link className="text-reset" to={`/course/${course.id}`}>{course.name}</Link></td>
-                                <td>{students.filter((student) => student.courseIds.includes(course.id)).length}</td>
-                            </tr>
-                        ))}
+                        {courseRows}
                     </tbody>
                 </table>
             </div>
