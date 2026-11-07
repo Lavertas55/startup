@@ -27,7 +27,7 @@ apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 // Register Class Endpoints
 apiRouter.get('/course/:id', authHandlers.verifyAuth, courseHandlers.getCourseHandler);
 apiRouter.get('/course', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
-apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
+apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler); // TODO: refactor to /course
 
 // Register Student Endpoints
 apiRouter.get('/student/:id', authHandlers.verifyAuth, studentHandlers.getStudentHandler);
@@ -36,6 +36,7 @@ apiRouter.post('/student', authHandlers.verifyAuth, studentHandlers.addStudentHa
 
 // Register Contact Endpoints
 apiRouter.get('/contact/:id', authHandlers.verifyAuth, contactHandlers.getContactHandler);
+apiRouter.get('/contact', authHandlers.verifyAuth, contactHandlers.getContactsHandlers);
 apiRouter.post('/contact', authHandlers.verifyAuth, contactHandlers.addContactHandler);
 
 // Register Error Handler
