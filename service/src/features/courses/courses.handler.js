@@ -1,12 +1,12 @@
 function createCourseHandlers(classService) {
     return {
         async addCourseHandler(req, res) {
-            const course = await classService.addCourse(
+            await classService.addCourse(
                 req.body.courseName,
                 req.body.courseCode
             );
 
-            res.send({ courseCode: course.courseCode });
+            res.status(204).end();
         },
 
         async getCoursesHandler(req, res) {
