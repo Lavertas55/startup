@@ -11,7 +11,7 @@ function createMemoryStudentDao(store) {
         async getStudentsByCourse(courseCode) {
             if (!courseCode) return null;
 
-            return store.students.filter((s) => s.courses.includes[courseCode]);
+            return store.students.filter((s) => s.courses.includes(courseCode));
         },
 
         async getAllStudents() {
