@@ -7,7 +7,7 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // Build Handlers
-const { authHandlers, courseHandlers, studentHandlers } = buildContainer();
+const { authHandlers, courseHandlers, studentHandlers, contactHandlers } = buildContainer();
 
 // Register Middleware
 app.use(express.json());
@@ -24,15 +24,19 @@ apiRouter.post('/auth/register', authHandlers.registerHandler.bind(authHandlers)
 apiRouter.post('/auth/login', authHandlers.loginHandler.bind(authHandlers));
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
-// Register Class Endpoint
+// Register Class Endpoints
 apiRouter.get('/course/:id', authHandlers.verifyAuth, courseHandlers.getCourseHandler);
 apiRouter.get('/course', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
 apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
 
-// Register Student Endpoint
+// Register Student Endpoints
 apiRouter.get('/student/:id', authHandlers.verifyAuth, studentHandlers.getStudentHandler);
 apiRouter.get('/student', authHandlers.verifyAuth, studentHandlers.getStudentsHandler);
 apiRouter.post('/student', authHandlers.verifyAuth, studentHandlers.addStudentHandler);
+
+// Register Contact Endpoints
+apiRouter.get('/contact/:id', authHandlers.verifyAuth, contactHandlers.getContactHandler);
+apiRouter.post('/contact', authHandlers.verifyAuth, contactHandlers.addContactHandler);
 
 // Register Error Handler
 app.use(errorHandler());
