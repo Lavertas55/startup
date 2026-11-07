@@ -1,4 +1,4 @@
-function createStudentHandlers(studentService) {
+function createStudentHandlers(studentService, courseService) {
     return {
         async addStudentHandler(req, res) {
             const student = await studentService.addStudent(

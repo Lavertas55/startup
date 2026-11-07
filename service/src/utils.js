@@ -30,7 +30,7 @@ function buildContainer() {
 
     const authHandlers = createAuthHandlers(authService, authCookieName);
     const courseHandlers = createCourseHandlers(courseService);
-    const studentHandlers = createStudentHandlers(studentService);
+    const studentHandlers = createStudentHandlers(studentService, courseService);
 
     return { authHandlers, courseHandlers, studentHandlers };
 }
