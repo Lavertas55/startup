@@ -18,9 +18,9 @@ export function CourseTable({ onToggle, refreshKey }) {
     if (courses.length) {
         for (const course of courses) {
             courseRows.push(
-                <tr key={course.courseCode}>
-                    <th scope="row">{course.courseCode}</th>
-                    <td><Link className="text-reset" to={`/course/${course.courseCode}`}>{course.courseName}</Link></td>
+                <tr key={course.id}>
+                    <th scope="row">{course.id}</th>
+                    <td><Link className="text-reset" to={`/course/${course.id}`}>{course.name}</Link></td>
                     <td>{course.students.length}</td>
                 </tr>
             );
