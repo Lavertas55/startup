@@ -25,7 +25,8 @@ apiRouter.post('/auth/login', authHandlers.loginHandler.bind(authHandlers));
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
 
 // Register Class Endpoint
-apiRouter.get('/courses', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
+apiRouter.get('/course/:id', authHandlers.verifyAuth, courseHandlers.getCourseHandler);
+apiRouter.get('/course', authHandlers.verifyAuth, courseHandlers.getCoursesHandler);
 apiRouter.post('/courses', authHandlers.verifyAuth, courseHandlers.addCourseHandler);
 
 // Register Student Endpoint
