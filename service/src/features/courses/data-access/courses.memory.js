@@ -26,7 +26,12 @@ function createMemoryCourseDao(store) {
             }
 
             store.courses.push(course);
-            return course;
+        },
+
+        async registerStudent(courseCode, studentId) {
+            const course = await this.findCourse('id', courseCode);
+
+            course.students.push(studentId);
         }
     }
 }
