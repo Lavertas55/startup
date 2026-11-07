@@ -18,7 +18,7 @@ export function Course() {
                 <AddStudentForm 
                     show={formVisible}
                     onToggle={setFormVisible}
-                    onAddStudent={() => setCourseRefreshKey((key) => key + 1)}
+                    onStudentAdded={() => setCourseRefreshKey((key) => key + 1)}
                 />
             </div>
         </main>
