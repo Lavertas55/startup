@@ -39,7 +39,7 @@ export function StudentTable({ onToggle, refreshKey}) {
                     <td>
                         <Link
                             className="text-reset"
-                            to={`/student/${student.id}${courseId ? '?course=${courseId}' : ''}`}
+                            to={`/student/${student.id}${courseId ? `?course=${courseId}` : ''}`}
                         >
                             {student.name}
                         </Link>
