@@ -3,6 +3,7 @@ function createMemoryStore() {
         users: [],
         courses: [],
         students: [],
+        contacts: [],
     };
 }
 
