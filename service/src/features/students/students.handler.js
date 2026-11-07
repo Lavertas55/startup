@@ -7,7 +7,13 @@ function createStudentHandlers(studentService, courseService) {
                 req.body.classes
             );
 
-            res.send({ id: student.id });
+            if (req.body.classes.length !== 0) {
+                for (course of req.body.classes) {
+                    await courseService.registerStudent(course, student.id);
+                }
+            }
+
+            res.status(204).end();
         },
 
         async getStudentHandler(req, res) {
