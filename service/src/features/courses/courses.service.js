@@ -6,6 +6,14 @@ function createCourseService(courseDao) {
 
         async getCourses() {
             return await courseDao.getCourses();
+        },
+
+        async getCourse(courseId) {
+            return await courseDao.findCourse('id', courseId);
+        },
+
+        async registerStudent(courseCode, studentId) {
+            return await courseDao.registerStudent(courseCode, studentId);
         }
     };
 }
