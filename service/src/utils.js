@@ -12,6 +12,10 @@ const { createStudentHandlers } = require("./features/students/students.handler"
 const { createStudentService } = require("./features/students/students.service");
 const { createMemoryStore } = require("./data/memory-store");
 
+const { createContactHandlers } = require("./features/contacts/contacts.handler");
+const { createContactsService } = require("./features/contacts/contacts.service");
+const { createMemoryContactDao } = require("./features/contacts/data-access/contacts.memory");
+
 const { RecordConflictError } = require("./errors/record-conflict");
 const { UnauthorizedError } = require("./errors/unauthorized");
 
@@ -23,16 +27,24 @@ function buildContainer() {
     const authDao = createMemoryAuthDao(memoryStore);
     const courseDao = createMemoryCourseDao(memoryStore);
     const studentDao = createMemoryStudentDao(memoryStore);
+    const contactDao = createMemoryContactDao(memoryStore);
 
     const authService = createAuthService(authDao, authCookieName);
     const courseService = createCourseService(courseDao);
     const studentService = createStudentService(studentDao);
+    const contactService = createContactsService(contactDao);
 
     const authHandlers = createAuthHandlers(authService, authCookieName);
     const courseHandlers = createCourseHandlers(courseService);
     const studentHandlers = createStudentHandlers(studentService, courseService);
+    const contactHandlers = createContactHandlers(contactService);
 
-    return { authHandlers, courseHandlers, studentHandlers };
+    return { 
+        authHandlers,
+        courseHandlers,
+        studentHandlers,
+        contactHandlers
+    };
 }
 
 function errorHandler() {
