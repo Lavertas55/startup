@@ -13,6 +13,16 @@ function createCourseHandlers(classService) {
             const courseList = await classService.getCourses();
 
             res.send({ courses: courseList });
+        },
+
+        async getCourseHandler(req, res) {
+            const course = await classService.getCourse(req.params.id);
+
+            res.send({
+                id: course.id,
+                name: course.name,
+                students: course.students
+            });
         }
     };
 }
