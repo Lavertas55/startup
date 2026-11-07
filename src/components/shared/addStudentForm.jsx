@@ -13,10 +13,10 @@ export function AddStudentForm({ show, onToggle, onStudentAdded }) {
 
     const [netId, setNetId] = React.useState('');
     const [studentName, setStudentName] = React.useState('');
-    const [courseId, setClassId] = React.useState(routeCourseId || '');
+    const [courseId, setCourseId] = React.useState(routeCourseId || '');
     
     React.useEffect(() => {
-        fetch('/api/courses')
+        fetch('/api/course')
             .then((response) => response.json())
             .then(({ courses }) => setCourses(courses));
     }, []);
@@ -52,14 +52,18 @@ export function AddStudentForm({ show, onToggle, onStudentAdded }) {
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify(student)
         });
-        const body = await response.json();
 
-        if (response?.status === 200) {
+        if (response?.ok) {
             onStudentAdded();
             onToggle(false);
         } else {
+            const body = await response.json();
             setDisplayError(`⚠ Error: ${body.msg}`)
         }
+
+        setCourseId(routeCourseId || '');
+        setNetId('');
+        setStudentName('');
     }
 
     return (
@@ -105,7 +109,7 @@ export function AddStudentForm({ show, onToggle, onStudentAdded }) {
                                     id="inputClass"
                                     className="form-select"
                                     value={courseId}
-                                    onChange={(e) => setClassId(e.target.value)}
+                                    onChange={(e) => setCourseId(e.target.value)}
                                 >
                                     <option value="">Choose...</option>
                                     { courseOptions }
