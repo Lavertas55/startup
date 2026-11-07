@@ -1,3 +1,5 @@
+const uuid = require('uuid');
+
 function createMemoryContactDao(store) {
     return {
         async findContact(field, value) {
@@ -8,6 +10,7 @@ function createMemoryContactDao(store) {
 
         async addContact(courseId, timestamp, instructor, method, success) {
             const contact = {
+                _id: uuid.v7(),
                 course: courseId,
                 timestamp: timestamp,
                 instructor: instructor,
@@ -19,3 +22,5 @@ function createMemoryContactDao(store) {
         }
     };
 }
+
+module.exports = { createMemoryContactDao };
