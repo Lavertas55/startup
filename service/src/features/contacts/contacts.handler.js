@@ -17,6 +17,14 @@ function createContactHandlers(contactService) {
             });
         },
 
+        async getContactsHandlers(req, res) {
+            const ids = req.body.ids.map((id) => uuid62.decode(id));
+
+            const contacts = await contactService.getContactsById(ids);
+
+            res.send({ contacts: JSON.stringify(contacts) });
+        },
+
         async addContactHandler(req, res) {
             await contactService.addContact(
                 req.body.course,

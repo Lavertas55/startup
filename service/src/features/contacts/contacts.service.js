@@ -4,6 +4,10 @@ function createContactService(contactsDao) {
             return await contactsDao.findContact('id', contactId);
         },
 
+        async getContactsById(contactIds) {
+            return await contactsDao.getContactsById(contactIds);
+        },
+
         async addContact(courseId, timestamp, instructor, method, success) {
             await contactsDao.addContact(
                 courseId,
