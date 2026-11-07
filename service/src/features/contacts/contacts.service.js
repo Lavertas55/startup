@@ -1,4 +1,4 @@
-function createContactsService(contactsDao) {
+function createContactService(contactsDao) {
     return {
         async getContact(contactId) {
             return await contactsDao.findContact('id', contactId);
@@ -16,4 +16,4 @@ function createContactsService(contactsDao) {
     };
 }
 
-module.exports = { createContactsService };
+module.exports = { createContactsService: createContactService };
