@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 export function StudentTable({ onToggle, refreshKey}) {
     const [students, setStudents] = React.useState([]);
     const [course, setCourse] = React.useState(null);
 
-    const [searchParams] = useSearchParams();
-    const courseId = searchParams.get('course');
+    const { courseId } = useParams();
 
     React.useEffect(() => {
         if (courseId) {
