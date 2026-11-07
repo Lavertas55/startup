@@ -19,9 +19,9 @@ function createMemoryCourseDao(store) {
                 students: []
             }
 
-            if (await this.findCourse('courseCode', course.courseCode)) {
+            if (await this.findCourse('id', course.id)) {
                 throw new RecordConflictError(
-                    `Course ${course.courseCode} already taken`
+                    `Course ${course.id} already taken`
                 );
             }
 
