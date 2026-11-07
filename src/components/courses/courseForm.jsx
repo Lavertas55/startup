@@ -23,9 +23,8 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify(course)
         });
-        const body = await response.json();
 
-        if (response?.status === 200) {
+        if (response?.ok) {
             onCourseAdded();
             onToggle(false);
         } else {
