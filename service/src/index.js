@@ -7,7 +7,7 @@ const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 // Build Handlers
-const { authHandlers, courseHandlers, studentHandlers, contactHandlers } = buildContainer();
+const { authHandlers, courseHandlers, studentHandlers, contactHandlers, reminderHandlers } = buildContainer();
 
 // Register Middleware
 app.use(express.json());
@@ -38,6 +38,12 @@ apiRouter.post('/student', authHandlers.verifyAuth, studentHandlers.addStudentHa
 apiRouter.get('/contact/:id', authHandlers.verifyAuth, contactHandlers.getContactHandler);
 apiRouter.get('/contact', authHandlers.verifyAuth, contactHandlers.getContactsHandlers);
 apiRouter.post('/contact', authHandlers.verifyAuth, contactHandlers.addContactHandler);
+
+// Register Reminder Endpoints
+apiRouter.get('/reminder/:id', authHandlers.verifyAuth, reminderHandlers.getReminderHandler);
+apiRouter.get('/reminder', authHandlers.verifyAuth, reminderHandlers.getRemindersHandler);
+apiRouter.post('/reminder', authHandlers.verifyAuth, reminderHandlers.addReminderHandler);
+apiRouter.delete('/reminder/:id', authHandlers.verifyAuth, reminderHandlers.deleteReminderHandler);
 
 // Register Error Handler
 app.use(errorHandler());
