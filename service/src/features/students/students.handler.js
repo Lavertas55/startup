@@ -22,7 +22,7 @@ function createStudentHandlers(studentService, courseService) {
             res.send({
                 id: student.id,
                 name: student.name,
-                classes: student.classes
+                courses: student.courses
             });
         },
 

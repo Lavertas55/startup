@@ -22,11 +22,12 @@ function createContactHandlers(contactService) {
 
             const contacts = await contactService.getContactsByStudent(studentId);
 
-            res.send({ contacts: JSON.stringify(contacts) });
+            res.send({ contacts });
         },
 
         async addContactHandler(req, res) {
             await contactService.addContact(
+                req.body.student,
                 req.body.course,
                 req.body.timestamp,
                 req.body.instructor,
