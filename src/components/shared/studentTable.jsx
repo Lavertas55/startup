@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -10,19 +11,19 @@ export function StudentTable({ onToggle, refreshKey}) {
 
     React.useEffect(() => {
         if (courseId) {
-            fetch(`/api/course/${courseId}`)
+            apiFetch(`/api/course/${courseId}`)
                 .then((response) => response.json())
                 .then(({ course }) => {
                     setCourse(course);
                 });
 
-            fetch(`/api/student?course=${courseId}`)
+            apiFetch(`/api/student?course=${courseId}`)
                 .then((response) => response.json())
                 .then(({ students }) => {
                     setStudents(students);
                 });
         } else {
-            fetch('/api/student')
+            apiFetch('/api/student')
                 .then((response) => response.json())
                 .then(({ students }) => {
                     setStudents(students);

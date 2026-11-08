@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -16,7 +17,7 @@ export function AddStudentForm({ show, onToggle, onStudentAdded }) {
     const [courseId, setCourseId] = React.useState(routeCourseId || '');
     
     React.useEffect(() => {
-        fetch('/api/course')
+        apiFetch('/api/course')
             .then((response) => response.json())
             .then(({ courses }) => setCourses(courses));
     }, []);
@@ -47,7 +48,7 @@ export function AddStudentForm({ show, onToggle, onStudentAdded }) {
             classes: [course] 
         };
 
-        const response = await fetch('/api/student', {
+        const response = await apiFetch('/api/student', {
             method: "post",
             headers: { "Content-type": "application/json; charset=UTF-8" },
             body: JSON.stringify(student)

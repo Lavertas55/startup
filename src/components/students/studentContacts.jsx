@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
@@ -10,7 +11,7 @@ function currentDateTime() {
 }
 
 async function fetchStudentContacts(studentId) {
-    const response = await fetch(`/api/contact?student=${studentId}`);
+    const response = await apiFetch(`/api/contact?student=${studentId}`);
     if (!response.ok) {
         throw new Error('Failed to load contacts.');
     }
@@ -35,7 +36,7 @@ export function StudentContacts() {
     const [course, setCourse] = React.useState('');
 
     React.useEffect(() => {
-        fetch(`/api/student/${studentId}`)
+        apiFetch(`/api/student/${studentId}`)
             .then((response) => response.json())
             .then((student) => setStudent(student));
 
@@ -104,7 +105,7 @@ export function StudentContacts() {
         };
 
         try {
-            const response = await fetch('/api/contact', {
+            const response = await apiFetch('/api/contact', {
                 method: 'post',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify(contact)

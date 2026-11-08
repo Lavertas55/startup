@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
@@ -10,7 +11,7 @@ function currentDateTime() {
 }
 
 async function fetchStudentReminders(studentId) {
-    const response = await fetch(`/api/reminder?student=${encodeURIComponent(studentId)}`);
+    const response = await apiFetch(`/api/reminder?student=${encodeURIComponent(studentId)}`);
     if (!response.ok) {
         const body = await response.json();
         throw new Error(body.msg || 'Failed to load reminders.');
@@ -35,7 +36,7 @@ export function StudentReminders() {
     async function submitForm(event) {
         event.preventDefault();
         try {
-            const response = await fetch('/api/reminder', {
+            const response = await apiFetch('/api/reminder', {
                 method: 'post',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify({ studentId, timestamp })
@@ -55,7 +56,7 @@ export function StudentReminders() {
 
     async function deleteReminder(reminderId) {
         try {
-            const response = await fetch(`/api/reminder/${encodeURIComponent(reminderId)}`, {
+            const response = await apiFetch(`/api/reminder/${encodeURIComponent(reminderId)}`, {
                 method: 'delete'
             });
 

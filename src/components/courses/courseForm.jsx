@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -18,7 +19,7 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
             courseCode: code
         };
 
-        const response = await fetch(`/api/courses`, {
+        const response = await apiFetch(`/api/courses`, {
                 method: 'post',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify(course)

@@ -1,3 +1,4 @@
+import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 
 import { Link } from 'react-router-dom';
@@ -7,7 +8,7 @@ export function CourseTable({ onToggle, refreshKey }) {
     const [courses, setCourses] = React.useState([]);
 
     React.useEffect(() => {
-        fetch('/api/course')
+        apiFetch('/api/course')
             .then((response) => response.json())
             .then(({ courses }) => {
                 setCourses(courses);
