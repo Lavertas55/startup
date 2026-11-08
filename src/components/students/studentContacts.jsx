@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { MessageDialog } from '../shared/messageDialog';
 
 function currentDateTime() {
     const date = new Date();
@@ -8,40 +9,55 @@ function currentDateTime() {
     return date.toISOString().slice(0, 16);
 }
 
+async function fetchStudentContacts(studentId) {
+    const response = await fetch(`/api/contact?student=${studentId}`);
+    if (!response.ok) {
+        throw new Error('Failed to load contacts.');
+    }
+
+    const { contacts } = await response.json();
+    return contacts;
+}
+
 export function StudentContacts() {
     const { studentId } = useParams();
 
     const [formVisible, setFormVisible] = React.useState(false);
+    const [displayError, setDisplayError] = React.useState(null);
     const [contacts, setContacts] = React.useState([]);
+    const [courses, setCourses] = React.useState([]);
 
     const [student, setStudent] = React.useState(null);
 
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
-    const [instructor, setInstructor] = React.useState('Shane Reese');
+    const [instructor, setInstructor] = React.useState(null);
     const [method, setMethod] = React.useState('Email');
+    const [course, setCourse] = React.useState('');
 
     React.useEffect(() => {
         fetch(`/api/student/${studentId}`)
             .then((response) => response.json())
-            .then(({ student }) => setStudent(student));
+            .then((student) => setStudent(student));
 
-        fetch(`/api/contact?student=${studentId}`)
-            .then((response) => response.json())
-            .then((contacts) => setContacts(contacts));
-    }, []);
+        fetchStudentContacts(studentId)
+            .then(setContacts)
+            .catch((error) => setDisplayError(`⚠ Error: ${error.message}`));
+    }, [studentId]);
+
+    React.useEffect(() => {
+        if (student) {
+            setCourses(student['courses']);
+        }
+    }, [student]);
 
     const contactRows = [];
     if (contacts.length) {
-        for (const contact of contacts) {
+        for (const [index, contact] of contacts.entries()) {
+            const timestampLabel = new Date(contact.timestamp).toLocaleString();
             contactRows.push(
-                <tr key={contact._id}>
+                <tr key={`${contact.timestamp}-${index}`}>
                     <th scope="row">
-                        <Link 
-                            className="text-reset"
-                            to={`/contact/${contact.id}`}
-                        >
-                            {new Date(contact.timestamp).toLocaleString}
-                        </Link>
+                        {timestampLabel}
                     </th>
                     <td>{contact.instructor}</td>
                     <td>{contact.method}</td>
@@ -66,14 +82,53 @@ export function StudentContacts() {
         )
     }
 
-    function submitContact(event) {
+    const courseOptions = [];
+    if (courses.length) {
+        for (const courseOption of courses) {
+            courseOptions.push(
+                <option value={courseOption}>{courseOption}</option>
+            );
+        }
+    }
+
+    async function submitContact(event) {
         event.preventDefault();
 
-        setFormVisible(false);
-        setTimestamp(currentDateTime());
+        const contact = {
+            student: studentId,
+            course: course,
+            timestamp: timestamp,
+            instructor: instructor,
+            method: method,
+            success: false
+        };
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json; charset=UTF-8' },
+                body: JSON.stringify(contact)
+            });
+
+            if (response.ok) {
+                setFormVisible(false);
+                setTimestamp(currentDateTime());
+                try {
+                    setContacts(await fetchStudentContacts(studentId));
+                } catch (error) {
+                    setDisplayError(`⚠ Error: Contact was saved, but the list could not be refreshed. ${error.message}`);
+                }
+            } else {
+                const body = await response.json();
+                setDisplayError(`⚠ Error: ${body.msg}`);
+            }
+        } catch (error) {
+            setDisplayError(`⚠ Error: ${error.message}`);
+        }
     }
 
     return (
+        <>
         <div className="card rounded-3">
             <div className="card-header">
                 <div className="table-header-container">
@@ -97,6 +152,13 @@ export function StudentContacts() {
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-timestamp">Timestamp</label>
                                 <input className="form-control" id="contact-timestamp" type="datetime-local" value={timestamp} onChange={(event) => setTimestamp(event.target.value)} />
+                            </div>
+                            <div className="col-12 col-md-4">
+                                <label className="form-label" htmlFor="contact-course">Course</label>
+                                <select className="form-select" id="contact-course" value={course} onChange={(event) => setCourse(event.target.value)}>
+                                    <option value="" disabled>Select a course...</option>
+                                    {courseOptions}
+                                </select>
                             </div>
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-instructor">Instructor</label>
@@ -142,5 +204,7 @@ export function StudentContacts() {
                 </table>
             </div>
         </div>
+        <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
+        </>
     );
 }
