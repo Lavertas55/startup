@@ -23,6 +23,7 @@ app.use('/api', apiRouter);
 apiRouter.post('/auth/register', authHandlers.registerHandler.bind(authHandlers));
 apiRouter.post('/auth/login', authHandlers.loginHandler.bind(authHandlers));
 apiRouter.delete('/auth/logout', authHandlers.logoutHandler);
+apiRouter.get('/auth/validate', authHandlers.verifyAuth, authHandlers.validateAuthHandler);
 
 // Register Class Endpoints
 apiRouter.get('/course/:id', authHandlers.verifyAuth, courseHandlers.getCourseHandler);
