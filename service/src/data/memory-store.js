@@ -4,6 +4,7 @@ function createMemoryStore() {
         courses: [],
         students: [],
         contacts: [],
+        reminders: [],
     };
 }
 
