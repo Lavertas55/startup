@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useParams } from 'react-router-dom';
-
-import { useRealtimeData, removeReminder, addReminder } from '../../services/realtimeData';
+import { MessageDialog } from '../shared/messageDialog';
 
 function currentDateTime() {
     const date = new Date();
@@ -10,26 +9,69 @@ function currentDateTime() {
     return date.toISOString().slice(0, 16);
 }
 
+async function fetchStudentReminders(studentId) {
+    const response = await fetch(`/api/reminder?student=${encodeURIComponent(studentId)}`);
+    if (!response.ok) {
+        const body = await response.json();
+        throw new Error(body.msg || 'Failed to load reminders.');
+    }
+
+    const { reminders } = await response.json();
+    return reminders.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+}
+
 export function StudentReminders() {
-    const { studentId = 'ccougar' } = useParams();
-    const { reminders } = useRealtimeData();
+    const { studentId } = useParams();
+    const [reminders, setReminders] = React.useState([]);
+    const [displayError, setDisplayError] = React.useState(null);
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
 
-    const studentReminders = reminders
-        .filter((reminder) => reminder.studentId === studentId)
-        .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+    React.useEffect(() => {
+        fetchStudentReminders(studentId)
+            .then(setReminders)
+            .catch((error) => setDisplayError(`⚠ Error: ${error.message}`));
+    }, [studentId]);
 
     async function submitForm(event) {
         event.preventDefault();
-        addReminder({
-            id: String(Date.now()),
-            studentId,
-            timestamp,
-        });
-        setTimestamp(currentDateTime());
+        try {
+            const response = await fetch('/api/reminder', {
+                method: 'post',
+                headers: { 'Content-type': 'application/json; charset=UTF-8' },
+                body: JSON.stringify({ studentId, timestamp })
+            });
+
+            if (!response.ok) {
+                const body = await response.json();
+                throw new Error(body.msg || 'Failed to create reminder.');
+            }
+
+            setReminders(await fetchStudentReminders(studentId));
+            setTimestamp(currentDateTime());
+        } catch (error) {
+            setDisplayError(`⚠ Error: ${error.message}`);
+        }
     }
-    
+
+    async function deleteReminder(reminderId) {
+        try {
+            const response = await fetch(`/api/reminder/${encodeURIComponent(reminderId)}`, {
+                method: 'delete'
+            });
+
+            if (!response.ok) {
+                const body = await response.json();
+                throw new Error(body.msg || 'Failed to delete reminder.');
+            }
+
+            setReminders(await fetchStudentReminders(studentId));
+        } catch (error) {
+            setDisplayError(`⚠ Error: ${error.message}`);
+        }
+    }
+
     return (
+        <>
         <div className="card rounded-3 mt-3">
             <div className="card-header">
                 <div className="table-header-container">
@@ -54,7 +96,7 @@ export function StudentReminders() {
                             </thead>
             
                             <tbody className="table-group-divider">
-                                {studentReminders.map((reminder) => (
+                                {reminders.map((reminder) => (
                                     <tr key={reminder.id}>
                                         <td>
                                             <div className="reminder">
@@ -65,7 +107,7 @@ export function StudentReminders() {
                                                     type='button'
                                                     id={`delete-${reminder.id}`}
                                                     aria-label="delete reminder"
-                                                    onClick={() => removeReminder(reminder.id)}
+                                                    onClick={() => deleteReminder(reminder.id)}
                                                 >
                                                     Delete
                                                 </Button>
@@ -94,5 +136,7 @@ export function StudentReminders() {
                 </div>
             </div>
         </div>
+        <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
+        </>
     );
 }
