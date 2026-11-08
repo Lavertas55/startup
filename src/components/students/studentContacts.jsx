@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link, useParams } from 'react-router-dom';
-import { addContact, useRealtimeData } from '../../services/realtimeData';
 
 function currentDateTime() {
     const date = new Date();
@@ -10,29 +9,66 @@ function currentDateTime() {
 }
 
 export function StudentContacts() {
-    const { studentId = 'ccougar' } = useParams();
-    const { students, contacts } = useRealtimeData();
+    const { studentId } = useParams();
+
     const [formVisible, setFormVisible] = React.useState(false);
+    const [contacts, setContacts] = React.useState([]);
+
+    const [student, setStudent] = React.useState(null);
+
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
     const [instructor, setInstructor] = React.useState('Shane Reese');
     const [method, setMethod] = React.useState('Email');
 
-    const student = students.find((item) => item.id === studentId);
-    const studentContacts = contacts
-        .filter((contact) => contact.studentId === studentId)
-        .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+    React.useEffect(() => {
+        fetch(`/api/student/${studentId}`)
+            .then((response) => response.json())
+            .then(({ student }) => setStudent(student));
+
+        fetch(`/api/contact?student=${studentId}`)
+            .then((response) => response.json())
+            .then((contacts) => setContacts(contacts));
+    }, []);
+
+    const contactRows = [];
+    if (contacts.length) {
+        for (const contact of contacts) {
+            contactRows.push(
+                <tr key={contact._id}>
+                    <th scope="row">
+                        <Link 
+                            className="text-reset"
+                            to={`/contact/${contact.id}`}
+                        >
+                            {new Date(contact.timestamp).toLocaleString}
+                        </Link>
+                    </th>
+                    <td>{contact.instructor}</td>
+                    <td>{contact.method}</td>
+                    <td className="contact-status">
+                        <input 
+                            className="form-check-input"
+                            type="checkbox"
+                            aria-label="contact success"
+                            checked={contact.success}
+                            readOnly
+                            disabled
+                        />
+                    </td>
+                </tr>
+            );
+        }
+    } else {
+        contactRows.push(
+            <tr key="0">
+                <td className="text-center" colSpan="4">No Contacts</td>
+            </tr>
+        )
+    }
 
     function submitContact(event) {
         event.preventDefault();
-        addContact({
-            id: String(Date.now()),
-            studentId,
-            timestamp,
-            instructor,
-            method,
-            success: true,
-            notes: '',
-        });
+
         setFormVisible(false);
         setTimestamp(currentDateTime());
     }
@@ -101,14 +137,7 @@ export function StudentContacts() {
                         </tr>
                     </thead>
                     <tbody className="table-group-divider">
-                        {studentContacts.map((contact) => (
-                            <tr key={contact.id}>
-                                <th scope="row"><Link className="text-reset" to={`/contact/${contact.id}`}>{new Date(contact.timestamp).toLocaleString()}</Link></th>
-                                <td>{contact.instructor}</td>
-                                <td>{contact.method}</td>
-                                <td className="contact-status"><input className="form-check-input" type="checkbox" aria-label="contact success" checked={contact.success} readOnly disabled /></td>
-                            </tr>
-                        ))}
+                        {contactRows}
                     </tbody>
                 </table>
             </div>
