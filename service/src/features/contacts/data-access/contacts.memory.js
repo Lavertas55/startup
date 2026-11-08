@@ -8,18 +8,15 @@ function createMemoryContactDao(store) {
             return store.contacts.find((c) => c[field] === value);
         },
 
-        async getAllContactsById(ids) {
-            const contacts = []
-            for (id of ids) {
-                contacts.put(await this.findContact('id', id));
-            }
+        async getContactsByStudent(studentId) {
+            if (!studentId) return null;
 
-            return contacts;
+            return store.contacts.filter((c) => c['student'] === studentId);
         },
 
-        async addContact(courseId, timestamp, instructor, method, success) {
+        async addContact(studentId, courseId, timestamp, instructor, method, success) {
             const contact = {
-                _id: uuid.v7(),
+                student: studentId,
                 course: courseId,
                 timestamp: timestamp,
                 instructor: instructor,

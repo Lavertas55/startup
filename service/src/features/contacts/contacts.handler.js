@@ -18,9 +18,9 @@ function createContactHandlers(contactService) {
         },
 
         async getContactsHandlers(req, res) {
-            const ids = req.body.ids.map((id) => uuid62.decode(id));
+            const studentId = req.query.student;
 
-            const contacts = await contactService.getContactsById(ids);
+            const contacts = await contactService.getContactsByStudent(studentId);
 
             res.send({ contacts: JSON.stringify(contacts) });
         },
