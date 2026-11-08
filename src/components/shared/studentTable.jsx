@@ -49,6 +49,12 @@ export function StudentTable({ onToggle, refreshKey}) {
                 </tr>
             );
         }
+    } else {
+        studentRows.push(
+            <tr key="0">
+                <td className="text-center" colSpan="2">No students registered</td>
+            </tr>
+        );
     }
 
     return (
