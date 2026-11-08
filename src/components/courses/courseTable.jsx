@@ -29,7 +29,7 @@ export function CourseTable({ onToggle, refreshKey }) {
     } else {
         courseRows.push(
             <tr key='0'>
-                <td className='text-center' colSpan='3'>Create your first Course!</td>
+                <td className='text-center' colSpan='3'>No courses registered</td>
             </tr>
         );
     }
