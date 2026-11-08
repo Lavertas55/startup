@@ -8,6 +8,7 @@ div.body {
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    min-height: 100vh;
     margin: 0;
 }
 
@@ -78,10 +79,6 @@ footer a {
 }
 
 @media (max-height: 600px) {
-    header {
-        display: none;
-    }
-
     footer {
         display: none;
     }
