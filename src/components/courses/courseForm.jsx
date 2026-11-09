@@ -7,6 +7,7 @@ import { MessageDialog } from '../shared/messageDialog';
 export function AddCourseForm({ show, onToggle, onCourseAdded }) {
     const [courseName, setCourseName] = React.useState('');
     const [courseCode, setCourseCode] = React.useState('');
+    const [webhookUrl, setWebhookUrl] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
 
     async function submitForm(event) {
@@ -16,7 +17,8 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
         const code = courseCode.trim();
         const course = {
             courseName: courseName,
-            courseCode: code
+            courseCode: code,
+            webhookUrl: webhookUrl.trim()
         };
 
         const response = await apiFetch(`/api/courses`, {
@@ -53,6 +55,11 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
                                 id="class-code"
                                 name="class-code"
                             />
+                        </div>
+                        <div className="input-group mb-3">
+                            <label className="input-group-text" htmlFor="webhook-url">Discord Webhook URL (optional):</label>
+                            <input className="form-control" type="url" value={webhookUrl}
+                                onChange={(e) => setWebhookUrl(e.target.value)} id="webhook-url" name="webhook-url" />
                         </div>
 
                         <div className="input-group mb-3">

@@ -3,7 +3,8 @@ function createCourseHandlers(classService) {
         async addCourseHandler(req, res) {
             await classService.addCourse(
                 req.body.courseName,
-                req.body.courseCode
+                req.body.courseCode,
+                req.body.webhookUrl
             );
 
             res.status(204).end();
@@ -21,6 +22,7 @@ function createCourseHandlers(classService) {
             res.send({
                 id: course.id,
                 name: course.name,
+                webhookUrl: course.webhookUrl || '',
                 students: course.students
             });
         }

@@ -1,7 +1,7 @@
 function createCourseService(courseDao) {
     return {
-        async addCourse(courseName, courseCode) {
-            return await courseDao.addCourse(courseName, courseCode);
+        async addCourse(courseName, courseCode, webhookUrl) {
+            return await courseDao.addCourse(courseName, courseCode, webhookUrl);
         },
 
         async getCourses() {
