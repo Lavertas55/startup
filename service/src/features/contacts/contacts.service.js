@@ -6,6 +6,10 @@ function createContactService(contactsDao) {
             return await contactsDao.findContact('id', contactId);
         },
 
+        async updateContact(contactId, updates) {
+            return await contactsDao.updateContact(contactId, updates);
+        },
+
         async getContactsByStudent(studentId) {
             return await contactsDao.getContactsByStudent(studentId);
         },

@@ -16,6 +16,7 @@ function createMemoryContactDao(store) {
 
         async addContact(studentId, courseId, timestamp, instructor, method, success) {
             const contact = {
+                id: uuid.v7(),
                 student: studentId,
                 course: courseId,
                 timestamp: timestamp,
@@ -25,6 +26,12 @@ function createMemoryContactDao(store) {
             };
 
             store.contacts.push(contact);
+        },
+
+        async updateContact(contactId, updates) {
+            const contact = await this.findContact('id', contactId);
+            if (!contact) return null;
+            Object.assign(contact, updates);
         }
     };
 }
