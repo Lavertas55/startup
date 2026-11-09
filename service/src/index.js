@@ -39,6 +39,7 @@ apiRouter.post('/student', authHandlers.verifyAuth, studentHandlers.addStudentHa
 apiRouter.get('/contact/:id', authHandlers.verifyAuth, contactHandlers.getContactHandler);
 apiRouter.get('/contact', authHandlers.verifyAuth, contactHandlers.getContactsHandlers);
 apiRouter.post('/contact', authHandlers.verifyAuth, contactHandlers.addContactHandler);
+apiRouter.put('/contact/:id', authHandlers.verifyAuth, contactHandlers.updateContactHandler);
 
 // Register Reminder Endpoints
 apiRouter.get('/reminder/:id', authHandlers.verifyAuth, reminderHandlers.getReminderHandler);
