@@ -31,10 +31,10 @@ export function StudentContacts() {
     const [student, setStudent] = React.useState(null);
 
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
-    const [instructor, setInstructor] = React.useState(null);
-    const [method, setMethod] = React.useState('Email');
+    const [instructor, setInstructor] = React.useState("");
+    const [method, setMethod] = React.useState("Email");
     const [success, setSuccess] = React.useState(false);
-    const [course, setCourse] = React.useState('');
+    const [course, setCourse] = React.useState("");
 
     React.useEffect(() => {
         apiFetch(`/api/student/${studentId}`)
@@ -115,6 +115,8 @@ export function StudentContacts() {
             if (response.ok) {
                 setFormVisible(false);
                 setTimestamp(currentDateTime());
+                setCourse("");
+                setInstructor("");
                 setSuccess(false);
                 try {
                     setContacts(await fetchStudentContacts(studentId));
@@ -122,11 +124,11 @@ export function StudentContacts() {
                     setDisplayError(`⚠ Error: Contact was saved, but the list could not be refreshed. ${error.message}`);
                 }
             } else {
-                const body = await response.json();
-                setDisplayError(`⚠ Error: ${body.msg}`);
+                const body = await response.json().catch(() => null);
+                setDisplayError(`⚠ Error: ${body?.msg || response.statusText || 'Unable to save contact.'}`);
             }
         } catch (error) {
-            setDisplayError(`⚠ Error: ${error.message}`);
+            setDisplayError(`⚠ Error: ${error.message || 'Could not connect to the server. Please try again.'}`);
         }
     }
 
@@ -166,7 +168,7 @@ export function StudentContacts() {
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-instructor">Instructor</label>
                                 <select className="form-select" id="contact-instructor" value={instructor} onChange={(event) => setInstructor(event.target.value)}>
-                                    <option value="">Select an Instructor...</option>
+                                    <option value="" disabled>Select an Instructor...</option>
                                     <optgroup label="Instructors">
                                         <option value="Shane Reese">Shane Reese</option>
                                     </optgroup>
