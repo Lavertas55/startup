@@ -5,12 +5,25 @@ import Button from 'react-bootstrap/Button';
 
 import { AuthState } from "../../login/authState";
 
+async function logout() {
+    const response = await fetch('/api/auth/logout', { method: 'DELETE' });
+    if (!response.ok) {
+        throw new Error('Logout request failed.');
+    }
+}
+
 export function Header(props) {
     const navigate = useNavigate();
 
     async function onLogout(onAuthChange) {
-        onAuthChange('', AuthState.Unauthenticated);
-        navigate('/');
+        try {
+            await logout();
+        } catch (error) {
+            console.error('Logout request failed:', error.message);
+        } finally {
+            onAuthChange('', AuthState.Unauthenticated);
+            navigate('/');
+        }
     }
 
     return (
