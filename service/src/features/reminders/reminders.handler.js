@@ -7,7 +7,9 @@ function createReminderHandlers(reminderService) {
                 id: reminder.id,
                 studentId: reminder.studentId,
                 courseId: reminder.courseId,
-                timestamp: reminder.timestamp
+                timestamp: reminder.timestamp,
+                delivered: reminder.delivered,
+                deliveryError: reminder.deliveryError
             });
         },
 

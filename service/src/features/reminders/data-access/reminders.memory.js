@@ -20,7 +20,8 @@ function createMemoryReminderDao(store) {
                 studentId,
                 courseId,
                 timestamp,
-                delivered: false
+                delivered: false,
+                deliveryError: null
             };
 
             store.reminders.push(reminder);

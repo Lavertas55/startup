@@ -48,21 +48,22 @@ function buildContainer() {
     const reminderHandlers = createReminderHandlers(reminderService);
 
     const reminderTimer = setInterval(async () => {
-        const due = memoryStore.reminders.filter((r) => !r.delivered && Date.parse(r.timestamp) <= Date.now());
+        const due = memoryStore.reminders.filter((r) => !r.delivered && !r.deliveryError && Date.parse(r.timestamp) <= Date.now());
         for (const reminder of due) {
-            reminder.delivered = true;
-            const course = await courseDao.findCourse('id', reminder.courseId);
-            if (!course?.webhookUrl) continue;
             try {
+                const course = await courseDao.findCourse('id', reminder.courseId);
+                if (!course?.webhookUrl) throw new Error('Course has no Discord webhook configured');
                 const response = await fetch(course.webhookUrl, {
                     method: 'POST',
                     redirect: 'error',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ content: `Reminder for student ${reminder.studentId} is due now.` })
                 });
-                if (!response.ok) console.error(`Discord reminder delivery failed (${response.status})`);
+                if (!response.ok) throw new Error(`Discord returned HTTP ${response.status}`);
+                reminder.delivered = true;
             } catch (error) {
-                console.error('Discord reminder delivery failed:', error.message);
+                reminder.deliveryError = error.message;
+                console.error(`Discord reminder ${reminder.id} delivery failed:`, error.message);
             }
         }
     }, 15000);
