@@ -47,6 +47,27 @@ function buildContainer() {
     const contactHandlers = createContactHandlers(contactService);
     const reminderHandlers = createReminderHandlers(reminderService);
 
+    const reminderTimer = setInterval(async () => {
+        const due = memoryStore.reminders.filter((r) => !r.delivered && Date.parse(r.timestamp) <= Date.now());
+        for (const reminder of due) {
+            reminder.delivered = true;
+            const course = await courseDao.findCourse('id', reminder.courseId);
+            if (!course?.webhookUrl) continue;
+            try {
+                const response = await fetch(course.webhookUrl, {
+                    method: 'POST',
+                    redirect: 'error',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: `Reminder for student ${reminder.studentId} is due now.` })
+                });
+                if (!response.ok) console.error(`Discord reminder delivery failed (${response.status})`);
+            } catch (error) {
+                console.error('Discord reminder delivery failed:', error.message);
+            }
+        }
+    }, 15000);
+    reminderTimer.unref();
+
     return { 
         authHandlers,
         courseHandlers,
