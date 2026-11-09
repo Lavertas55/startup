@@ -13,6 +13,7 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
     async function submitForm(event) {
         event.preventDefault();
         if (!courseName.trim() || !courseCode.trim()) return;
+        setDisplayError(null);
 
         const code = courseCode.trim();
         const course = {
@@ -21,17 +22,23 @@ export function AddCourseForm({ show, onToggle, onCourseAdded }) {
             webhookUrl: webhookUrl.trim()
         };
 
-        const response = await apiFetch(`/api/courses`, {
+        try {
+            const response = await apiFetch(`/api/courses`, {
                 method: 'post',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
                 body: JSON.stringify(course)
-        });
+            });
 
-        if (response?.ok) {
-            onCourseAdded();
-            onToggle(false);
-        } else {
-            setDisplayError(`⚠ Error: ${body.msg}`)
+            if (response.ok) {
+                onCourseAdded();
+                onToggle(false);
+                return;
+            }
+
+            const body = await response.json().catch(() => null);
+            setDisplayError(`⚠ Error: ${body?.msg || response.statusText || 'Unable to add course.'}`);
+        } catch {
+            setDisplayError('⚠ Error: Could not connect to the server. Please try again.');
         }
 
     }
