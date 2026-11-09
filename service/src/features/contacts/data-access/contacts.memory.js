@@ -32,6 +32,8 @@ function createMemoryContactDao(store) {
             const contact = await this.findContact('id', contactId);
             if (!contact) return null;
             Object.assign(contact, updates);
+
+            return contact
         }
     };
 }
