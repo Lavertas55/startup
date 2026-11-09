@@ -1,7 +1,7 @@
 import { apiFetch } from '../../utils/api-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { MessageDialog } from '../shared/messageDialog';
 
 function currentDateTime() {
@@ -22,7 +22,7 @@ async function fetchStudentContacts(studentId) {
 
 export function StudentContacts() {
     const { studentId } = useParams();
-
+name
     const [formVisible, setFormVisible] = React.useState(false);
     const [displayError, setDisplayError] = React.useState(null);
     const [contacts, setContacts] = React.useState([]);
@@ -59,7 +59,9 @@ export function StudentContacts() {
             contactRows.push(
                 <tr key={`${contact.timestamp}-${index}`}>
                     <th scope="row">
-                        {timestampLabel}
+                        <Link className="text-reset" to={`/contact/${encodeURIComponent(contact.id)}`}>
+                            {timestampLabel}
+                        </Link>
                     </th>
                     <td>{contact.instructor}</td>
                     <td>{contact.method}</td>
