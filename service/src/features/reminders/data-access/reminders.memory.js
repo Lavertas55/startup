@@ -21,7 +21,8 @@ function createMemoryReminderDao(store) {
                 courseId,
                 timestamp,
                 delivered: false,
-                deliveryError: null
+                deliveryError: null,
+                attempts: 0
             };
 
             store.reminders.push(reminder);

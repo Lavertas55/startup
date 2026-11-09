@@ -9,7 +9,8 @@ function createReminderHandlers(reminderService) {
                 courseId: reminder.courseId,
                 timestamp: reminder.timestamp,
                 delivered: reminder.delivered,
-                deliveryError: reminder.deliveryError
+                deliveryError: reminder.deliveryError,
+                attempts: reminder.attempts
             });
         },
 
