@@ -33,6 +33,7 @@ export function StudentContacts() {
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
     const [instructor, setInstructor] = React.useState(null);
     const [method, setMethod] = React.useState('Email');
+    const [success, setSuccess] = React.useState(false);
     const [course, setCourse] = React.useState('');
 
     React.useEffect(() => {
@@ -101,7 +102,7 @@ export function StudentContacts() {
             timestamp: timestamp,
             instructor: instructor,
             method: method,
-            success: false
+            success
         };
 
         try {
@@ -114,6 +115,7 @@ export function StudentContacts() {
             if (response.ok) {
                 setFormVisible(false);
                 setTimestamp(currentDateTime());
+                setSuccess(false);
                 try {
                     setContacts(await fetchStudentContacts(studentId));
                 } catch (error) {
@@ -164,6 +166,7 @@ export function StudentContacts() {
                             <div className="col-12 col-md-4">
                                 <label className="form-label" htmlFor="contact-instructor">Instructor</label>
                                 <select className="form-select" id="contact-instructor" value={instructor} onChange={(event) => setInstructor(event.target.value)}>
+                                    <option value="">Select an Instructor...</option>
                                     <optgroup label="Instructors">
                                         <option value="Shane Reese">Shane Reese</option>
                                     </optgroup>
@@ -180,6 +183,13 @@ export function StudentContacts() {
                                     <option>Discord</option>
                                     <option>In Person</option>
                                 </select>
+                            </div>
+                            <div className="col-12 col-md-4 d-flex align-items-end">
+                                <div className="form-check mb-2">
+                                    <input className="form-check-input" id="contact-success" type="checkbox" checked={success}
+                                        onChange={(event) => setSuccess(event.target.checked)} />
+                                    <label className="form-check-label" htmlFor="contact-success">Successful contact</label>
+                                </div>
                             </div>
                         </div>
                         <Button className="mt-3" variant="success" type="submit">Save Contact</Button>
