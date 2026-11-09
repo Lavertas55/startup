@@ -18,7 +18,9 @@ async function fetchStudentReminders(studentId) {
     }
 
     const { reminders } = await response.json();
-    return reminders.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+    return reminders
+        .filter((reminder) => !reminder.delivered && !reminder.deliveryError)
+        .sort((a, b) => b.timestamp.localeCompare(a.timestamp));
 }
 
 export function StudentReminders() {
@@ -26,8 +28,21 @@ export function StudentReminders() {
     const [reminders, setReminders] = React.useState([]);
     const [displayError, setDisplayError] = React.useState(null);
     const [timestamp, setTimestamp] = React.useState(currentDateTime);
+    const [courses, setCourses] = React.useState([]);
+    const [courseId, setCourseId] = React.useState('');
 
     React.useEffect(() => {
+        apiFetch(`/api/student/${encodeURIComponent(studentId)}`)
+            .then(async (response) => {
+                if (!response.ok) throw new Error('Failed to load student courses.');
+                return response.json();
+            })
+            .then((student) => {
+                const enrolledCourses = student.courses || [];
+                setCourses(enrolledCourses);
+            })
+            .catch((error) => setDisplayError(`⚠ Error: ${error.message}`));
+
         fetchStudentReminders(studentId)
             .then(setReminders)
             .catch((error) => setDisplayError(`⚠ Error: ${error.message}`));
@@ -71,7 +86,7 @@ export function StudentReminders() {
             const response = await apiFetch('/api/reminder', {
                 method: 'post',
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
-                body: JSON.stringify({ studentId, timestamp })
+                body: JSON.stringify({ studentId, timestamp, courseId })
             });
 
             if (!response.ok) {
@@ -135,7 +150,7 @@ export function StudentReminders() {
                     </div>
         
                     <form className="mt-3" onSubmit={submitForm}>
-                        <div className="input-group">
+                        <div className="input-group mb-3">
                             <label className="input-group-text" htmlFor="timestamp">Date:</label>
                             <input
                                 className="form-control"
@@ -145,8 +160,16 @@ export function StudentReminders() {
                                 value={timestamp}
                                 onChange={(e) => setTimestamp(e.target.value)}
                             />
-                            <Button type="submit" variant="success">Add Reminder</Button>
                         </div>
+                        <div className="input-group mb-3">
+                            <label className="input-group-text" htmlFor="reminder-course">Course:</label>
+                            <select className="form-select" id="reminder-course" value={courseId}
+                                onChange={(event) => setCourseId(event.target.value)} required disabled={!courses.length}>
+                                <option value="" disabled>Select an enrolled course...</option>
+                                {courses.map((course) => <option key={course} value={course}>{course}</option>)}
+                            </select>
+                        </div>
+                        <Button type="submit" variant="success" disabled={!courseId}>Add Reminder</Button>
                     </form>
                 </div>
             </div>
