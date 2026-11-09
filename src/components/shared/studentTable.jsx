@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
-export function StudentTable({ onToggle, refreshKey}) {
+export function StudentTable({ onToggle, refreshKey }) {
     const [students, setStudents] = React.useState([]);
     const [course, setCourse] = React.useState(null);
 
@@ -52,7 +52,7 @@ export function StudentTable({ onToggle, refreshKey}) {
     } else {
         studentRows.push(
             <tr key="0">
-                <td className="text-center" colSpan="2">No students registered</td>
+                <td className="text-center" colSpan={ courseId ? 3 : 2 }>No students registered</td>
             </tr>
         );
     }
