@@ -6,6 +6,7 @@ function createReminderHandlers(reminderService) {
             res.send({
                 id: reminder.id,
                 studentId: reminder.studentId,
+                courseId: reminder.courseId,
                 timestamp: reminder.timestamp
             });
         },
@@ -19,7 +20,8 @@ function createReminderHandlers(reminderService) {
         async addReminderHandler(req, res) {
             await reminderService.addReminder(
                 req.body.studentId,
-                req.body.timestamp
+                req.body.timestamp,
+                req.body.courseId
             );
 
             res.status(204).end();

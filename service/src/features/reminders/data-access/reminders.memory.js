@@ -14,11 +14,13 @@ function createMemoryReminderDao(store) {
             return store.reminders.filter((reminder) => reminder.studentId === studentId);
         },
 
-        async addReminder(studentId, timestamp) {
+        async addReminder(studentId, timestamp, courseId) {
             const reminder = {
                 id: uuid.v7(),
                 studentId,
-                timestamp
+                courseId,
+                timestamp,
+                delivered: false
             };
 
             store.reminders.push(reminder);

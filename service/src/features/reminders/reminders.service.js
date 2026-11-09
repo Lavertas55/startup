@@ -8,8 +8,8 @@ function createRemindersService(reminderDao) {
             return await reminderDao.getRemindersByStudent(studentId);
         },
 
-        async addReminder(studentId, timestamp) {
-            return await reminderDao.addReminder(studentId, timestamp);
+        async addReminder(studentId, timestamp, courseId) {
+            return await reminderDao.addReminder(studentId, timestamp, courseId);
         },
 
         async removeReminder(reminderId) {
