@@ -1,18 +1,25 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { updateContact } from '../../services/realtimeData';
+import { apiFetch } from '../../utils/api-fetch';
 
-export function EditContactForm({ contact, onToggle }) {
+export function EditContactForm({ contact, onToggle, onSaved, onError }) {
     const [timestamp, setTimestamp] = React.useState(contact.timestamp);
     const [instructor, setInstructor] = React.useState(contact.instructor);
     const [method, setMethod] = React.useState(contact.method);
     const [success, setSuccess] = React.useState(contact.success);
     const [notes, setNotes] = React.useState(contact.notes);
 
-    function saveContact(event) {
+    async function saveContact(event) {
         event.preventDefault();
-        updateContact({ ...contact, timestamp, instructor, method, success, notes });
-        onToggle(false);
+        try {
+            const response = await apiFetch(`/api/contact/${encodeURIComponent(contact.id)}`, {
+                method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ timestamp, instructor, method, success, notes })
+            });
+            if (!response.ok) throw new Error((await response.json()).msg || 'Failed to update contact.');
+            onSaved({ ...contact, timestamp, instructor, method, success, notes });
+            onToggle(false);
+        } catch (error) { onError(`⚠ Error: ${error.message}`); }
     }
 
     return (
