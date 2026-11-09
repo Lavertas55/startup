@@ -1,4 +1,4 @@
-const UnauthorizedError = require("../errors/unauthorized");
+const { UnauthorizedError } = require("../errors/unauthorized");
 
 function createAuthHandlers(authService, authCookieName) {
     const authCookieOptions = {
