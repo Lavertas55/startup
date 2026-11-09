@@ -22,6 +22,7 @@ const { createMemoryReminderDao } = require("./features/reminders/data-access/re
 
 const { RecordConflictError } = require("./errors/record-conflict");
 const { UnauthorizedError } = require("./errors/unauthorized");
+const { BadRequestError } = require("./errors/bad-request");
 
 const authCookieName = 'token';
 
@@ -61,6 +62,8 @@ function errorHandler() {
             res.status(409);
         } else if (err instanceof UnauthorizedError) {
             res.status(401);
+        } else if (err instanceof BadRequestError) {
+            res.status(400);
         } else {
             res.status(500);
         }
