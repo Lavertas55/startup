@@ -33,6 +33,38 @@ export function StudentReminders() {
             .catch((error) => setDisplayError(`⚠ Error: ${error.message}`));
     }, [studentId]);
 
+    const reminderRows = [];
+    if (reminders.length) {
+        for (const reminder of reminders) {
+            const timestampLabel = new Date(reminder.timestamp).toLocaleString();
+            reminderRows.push(
+                <tr key={reminder.id}>
+                    <td>
+                        <div className="reminder">
+                            <span>{timestampLabel}</span>
+                            <Button
+                                variant="danger"
+                                size="sm"
+                                type="button"
+                                id={`delete-${reminder.id}`}
+                                aria-label="delete reminder"
+                                onClick={() => deleteReminder(reminder.id)}
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                    </td>
+                </tr>
+            );
+        }
+    } else {
+        reminderRows.push(
+            <tr>
+                <td className="text-center">No Reminders</td>
+            </tr>
+        )
+    }
+
     async function submitForm(event) {
         event.preventDefault();
         try {
@@ -97,25 +129,7 @@ export function StudentReminders() {
                             </thead>
             
                             <tbody className="table-group-divider">
-                                {reminders.map((reminder) => (
-                                    <tr key={reminder.id}>
-                                        <td>
-                                            <div className="reminder">
-                                                <span>{new Date(reminder.timestamp).toLocaleString()}</span>
-                                                <Button
-                                                    variant='danger'
-                                                    size='sm'
-                                                    type='button'
-                                                    id={`delete-${reminder.id}`}
-                                                    aria-label="delete reminder"
-                                                    onClick={() => deleteReminder(reminder.id)}
-                                                >
-                                                    Delete
-                                                </Button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
+                                {reminderRows}
                             </tbody>
                         </table>
                     </div>
