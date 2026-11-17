@@ -1,16 +1,17 @@
+const { createMemoryStore } = require("./data/memory-store");
+const { getDatabaseConnection } = require("./data/dbConnection");
+
 const { createAuthHandlers } = require("./auth/auth.handler");
 const { createAuthService } = require("./auth/auth.service");
-const { createMemoryAuthDao } = require("./auth/data-access/auth.memory");
+const { createMongoAuthDao } = require("./auth/data-access/auth.mongo");
 
 const { createCourseHandlers } = require("./features/courses/courses.handler");
 const { createCourseService } = require("./features/courses/courses.service");
 const { createMemoryCourseDao } = require("./features/courses/data-access/courses.memory");
 
-const { createMemoryStudentDao } = require("./features/students/data-access/students.memory");
-
 const { createStudentHandlers } = require("./features/students/students.handler");
 const { createStudentService } = require("./features/students/students.service");
-const { createMemoryStore } = require("./data/memory-store");
+const { createMemoryStudentDao } = require("./features/students/data-access/students.memory");
 
 const { createContactHandlers } = require("./features/contacts/contacts.handler");
 const { createContactsService } = require("./features/contacts/contacts.service");
@@ -28,8 +29,9 @@ const authCookieName = 'token';
 
 function buildContainer() {
     const memoryStore = createMemoryStore();
+    const dbConnection = getDatabaseConnection();
 
-    const authDao = createMemoryAuthDao(memoryStore);
+    const authDao = createMongoAuthDao(dbConnection);
     const courseDao = createMemoryCourseDao(memoryStore);
     const studentDao = createMemoryStudentDao(memoryStore);
     const contactDao = createMemoryContactDao(memoryStore);

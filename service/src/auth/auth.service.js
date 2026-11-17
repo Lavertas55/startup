@@ -15,6 +15,7 @@ function createAuthService(authDao) {
             if (user) {
                 if (await bcrypt.compare(password, user.password)) {
                     user.token = uuid.v4();
+                    await authDao.updateUser(user);
                     return user;
                 }
             }
@@ -26,6 +27,7 @@ function createAuthService(authDao) {
             const user = await authDao.findUser('token', authToken);
             if (user) {
                 delete user.token;
+                await authDao.updateUserRemoveAuth(user);
             }
         },
 
