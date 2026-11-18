@@ -26,7 +26,7 @@ function createMongoCourseDao(db) {
                 );
             }
 
-            courseCollection.insertOne(course);
+            await courseCollection.insertOne(course);
         },
 
         async registerStudent(courseCode, studentId) {

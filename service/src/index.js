@@ -1,7 +1,8 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
 
-const { buildContainer, errorHandler } = require('./utils');
+const { buildContainer } = require('./build');
+const { errorHandler } = require('./utils');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
