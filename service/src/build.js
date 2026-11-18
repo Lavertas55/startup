@@ -43,7 +43,11 @@ function buildContainer() {
     const contactHandlers = createContactHandlers(contactService);
     const reminderHandlers = createReminderHandlers(reminderService);
 
-    const reminderTimer = setInterval(reminderService.createReminderScheduler, 15000);
+    const reminderScheduler = reminderService.createReminderScheduler(reminderDao, courseDao);
+    const reminderTimer = setInterval(
+        reminderScheduler.processDueReminders,
+        15000
+    );
     reminderTimer.unref();
 
     return { 
