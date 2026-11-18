@@ -3,15 +3,7 @@ function createReminderHandlers(reminderService) {
         async getReminderHandler(req, res) {
             const reminder = await reminderService.getReminder(req.params.id);
 
-            res.send({
-                id: reminder.id,
-                studentId: reminder.studentId,
-                courseId: reminder.courseId,
-                timestamp: reminder.timestamp,
-                delivered: reminder.delivered,
-                deliveryError: reminder.deliveryError,
-                attempts: reminder.attempts
-            });
+            res.send(JSON.stringify(reminder));
         },
 
         async getRemindersHandler(req, res) {

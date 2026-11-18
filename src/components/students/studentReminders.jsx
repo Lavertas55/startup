@@ -53,7 +53,7 @@ export function StudentReminders() {
         for (const reminder of reminders) {
             const timestampLabel = new Date(reminder.timestamp).toLocaleString();
             reminderRows.push(
-                <tr key={reminder.id}>
+                <tr key={reminder._id}>
                     <td>
                         <div className="reminder">
                             <span>{timestampLabel}</span>
@@ -61,7 +61,7 @@ export function StudentReminders() {
                                 variant="danger"
                                 size="sm"
                                 type="button"
-                                id={`delete-${reminder.id}`}
+                                id={`delete-${reminder._id}`}
                                 aria-label="delete reminder"
                                 onClick={() => deleteReminder(reminder.id)}
                             >

@@ -1,11 +1,15 @@
 function createRemindersService(reminderDao) {
     return {
         async getReminder(reminderId) {
-            return await reminderDao.findReminder('id', reminderId);
+            return await reminderDao.findReminder('_id', reminderId);
         },
 
         async getRemindersByStudent(studentId) {
             return await reminderDao.getRemindersByStudent(studentId);
+        },
+
+        async getReminders() {
+            return await reminderDao.getReminders();
         },
 
         async addReminder(studentId, timestamp, courseId) {
@@ -14,6 +18,10 @@ function createRemindersService(reminderDao) {
 
         async removeReminder(reminderId) {
             return await reminderDao.removeReminder(reminderId);
+        },
+
+        async updateReminder(id, updates) {
+            await reminderDao.updateReminder(id, updates);
         }
     };
 }

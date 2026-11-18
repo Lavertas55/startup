@@ -19,7 +19,7 @@ const { createMongoContactDao } = require("./features/contacts/data-access/conta
 
 const { createReminderHandlers } = require("./features/reminders/reminders.handler");
 const { createRemindersService } = require("./features/reminders/reminders.service");
-const { createMemoryReminderDao } = require("./features/reminders/data-access/reminders.memory");
+const { createMongoReminderDao } = require("./features/reminders/data-access/reminders.mongo");
 
 const { RecordConflictError } = require("./errors/record-conflict");
 const { UnauthorizedError } = require("./errors/unauthorized");
@@ -28,14 +28,13 @@ const { BadRequestError } = require("./errors/bad-request");
 const authCookieName = 'token';
 
 function buildContainer() {
-    const memoryStore = createMemoryStore();
     const dbConnection = getDatabaseConnection();
 
     const authDao = createMongoAuthDao(dbConnection);
     const courseDao = createMongoCourseDao(dbConnection);
     const studentDao = createMongoStudentDao(dbConnection);
     const contactDao = createMongoContactDao(dbConnection);
-    const reminderDao = createMemoryReminderDao(memoryStore);
+    const reminderDao = createMongoReminderDao(dbConnection);
 
     const authService = createAuthService(authDao, authCookieName);
     const courseService = createCourseService(courseDao);
@@ -50,24 +49,28 @@ function buildContainer() {
     const reminderHandlers = createReminderHandlers(reminderService);
 
     const reminderTimer = setInterval(async () => {
-        const due = memoryStore.reminders.filter((r) => !r.delivered && r.attempts < 3 && Date.parse(r.timestamp) <= Date.now());
+        const reminders = await reminderService.getReminders()
+        const due = reminders.filter((r) => !r.delivered && r.attempts < 3 && Date.parse(r.timestamp) <= Date.now());
         for (const reminder of due) {
             reminder.attempts += 1;
             try {
-                const course = await courseDao.findCourse('id', reminder.courseId);
+                const course = await courseDao.findCourse('id', reminder.course);
                 if (!course?.webhookUrl) throw new Error('Course has no Discord webhook configured');
                 const response = await fetch(course.webhookUrl, {
                     method: 'POST',
                     redirect: 'error',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ content: `Reminder for student ${reminder.studentId} is due now.` })
+                    body: JSON.stringify({ content: `Reminder for student ${reminder.student} is due now.` })
                 });
                 if (!response.ok) throw new Error(`Discord returned HTTP ${response.status}`);
                 reminder.delivered = true;
             } catch (error) {
                 reminder.deliveryError = reminder.attempts >= 3 ? error.message : null;
-                console.error(`Discord reminder ${reminder.id} delivery failed:`, error.message);
+                console.error(`Discord reminder ${reminder._id} delivery failed:`, error.message);
             }
+
+            const { _id, ...rest } = reminder;
+            reminderService.updateReminder(_id, rest);
         }
     }, 15000);
     reminderTimer.unref();
