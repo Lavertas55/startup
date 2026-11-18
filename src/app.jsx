@@ -45,7 +45,7 @@ function AppRoutes() {
                 }
             })
             .catch(() => {
-                if (active) setAuthState(AuthState.Authenticated);
+                if (active) setAuthState(AuthState.Unauthenticated);
             });
         return () => { active = false; };
     }, []);
