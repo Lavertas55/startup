@@ -4,16 +4,7 @@ function createContactHandlers(contactService) {
             const contact = await contactService.getContact(req.params.id);
             if (!contact) res.status(404).send({ msg: 'Contact not found' });
 
-            res.send({
-                id: contact.id,
-                studentId: contact.student,
-                course: contact.course,
-                timestamp: contact.timestamp,
-                instructor: contact.instructor,
-                method: contact.method,
-                success: contact.success,
-                notes: contact.notes || ''
-            });
+            res.send(JSON.stringify(contact));
         },
 
         async getContactsHandlers(req, res) {
@@ -39,8 +30,7 @@ function createContactHandlers(contactService) {
 
         async updateContactHandler(req, res) {
             const { timestamp, instructor, method, success, notes } = req.body;
-            const contact = await contactService.updateContact(req.params.id, { timestamp, instructor, method, success, notes });
-            if (!contact) return res.status(404).send({ msg: 'Contact not found' });
+            await contactService.updateContact(req.params.id, { timestamp, instructor, method, success, notes });
             res.status(204).end();
         }
     };

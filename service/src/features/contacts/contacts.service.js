@@ -3,7 +3,7 @@ const { BadRequestError } = require('../../errors/bad-request');
 function createContactService(contactsDao) {
     return {
         async getContact(contactId) {
-            return await contactsDao.findContact('id', contactId);
+            return await contactsDao.findContact('_id', contactId);
         },
 
         async updateContact(contactId, updates) {
