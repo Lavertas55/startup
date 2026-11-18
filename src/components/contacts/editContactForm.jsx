@@ -12,7 +12,7 @@ export function EditContactForm({ contact, onToggle, onSaved, onError }) {
     async function saveContact(event) {
         event.preventDefault();
         try {
-            const response = await apiFetch(`/api/contact/${encodeURIComponent(contact.id)}`, {
+            const response = await apiFetch(`/api/contact/${encodeURIComponent(contact._id)}`, {
                 method: 'PUT', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ timestamp, instructor, method, success, notes })
             });
