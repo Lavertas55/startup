@@ -22,7 +22,7 @@ async function fetchStudentContacts(studentId) {
 
 export function StudentContacts() {
     const { studentId } = useParams();
-name
+
     const [formVisible, setFormVisible] = React.useState(false);
     const [displayError, setDisplayError] = React.useState(null);
     const [contacts, setContacts] = React.useState([]);
@@ -59,7 +59,7 @@ name
             contactRows.push(
                 <tr key={`${contact.timestamp}-${index}`}>
                     <th scope="row">
-                        <Link className="text-reset" to={`/contact/${encodeURIComponent(contact.id)}`}>
+                        <Link className="text-reset" to={`/contact/${encodeURIComponent(contact._id)}`}>
                             {timestampLabel}
                         </Link>
                     </th>

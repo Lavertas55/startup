@@ -7,7 +7,6 @@ export function Student() {
             <div>
                 <StudentContacts />
 
-                {/* Reminders will be delivered using the Discord API */}
                 <StudentReminders />
             </div>
         </main>
