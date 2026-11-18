@@ -1,19 +1,29 @@
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { useRealtimeData } from '../../services/realtimeData';
+import { apiFetch } from '../../utils/api-fetch';
 
 export function ContactInfo({ contact, onToggle }) {
     const timestamp = new Date(contact.timestamp).toLocaleString();
-    const { students } = useRealtimeData();
-    const student = students.find((item) => item.id === contact.studentId);
+
+    const [student, setStudent] = React.useState(null);
+
+    React.useEffect(() => {
+        apiFetch(`/api/student/${contact.student}`)
+            .then((response) => response.json())
+            .then((student) => setStudent(student));
+    }, []);
+
+    console.log(student);
+
     return (
         <div className="card rounded-3 mb-3">
             <div className="card-header">
                 <div className="table-title-container">
                     <div className="table-title">
-                        <h1>{student?.name ?? contact.studentId}</h1>
+                        <h1>{student?.name ?? contact.student}</h1>
 
                         <div className="table-subtitle">
-                            <h4>NetID: {contact.studentId}</h4>
+                            <h4>NetID: {contact.student}</h4>
                         </div>
                     </div>
                     
