@@ -15,7 +15,7 @@ const { createMongoStudentDao } = require("./features/students/data-access/stude
 
 const { createContactHandlers } = require("./features/contacts/contacts.handler");
 const { createContactsService } = require("./features/contacts/contacts.service");
-const { createMemoryContactDao } = require("./features/contacts/data-access/contacts.memory");
+const { createMongoContactDao } = require("./features/contacts/data-access/contacts.mongo");
 
 const { createReminderHandlers } = require("./features/reminders/reminders.handler");
 const { createRemindersService } = require("./features/reminders/reminders.service");
@@ -34,7 +34,7 @@ function buildContainer() {
     const authDao = createMongoAuthDao(dbConnection);
     const courseDao = createMongoCourseDao(dbConnection);
     const studentDao = createMongoStudentDao(dbConnection);
-    const contactDao = createMemoryContactDao(memoryStore);
+    const contactDao = createMongoContactDao(dbConnection);
     const reminderDao = createMemoryReminderDao(memoryStore);
 
     const authService = createAuthService(authDao, authCookieName);
